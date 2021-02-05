@@ -14,7 +14,7 @@ import java.util.Date;
 @SpringBootTest
 public class WorkoutEntityTest {
     @Autowired
-    WorkoutRepository workoutRepository;
+    private WorkoutRepository workoutRepository;
 
     @Test
     public void saveNewWorkoutTest(){

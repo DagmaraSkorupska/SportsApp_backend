@@ -14,7 +14,7 @@ import static com.project.sports_app_backend.domain.UserType.USER;
 @SpringBootTest
 public class UserEntityTest {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Test
     public void saveNewUserTest() {
