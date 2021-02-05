@@ -9,26 +9,26 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    @Autowired
-    private UserRepository userRepository;
-
-    public UserEntity logIn(String email, String password){
-        Optional<UserEntity> user = userRepository.findByEmail(email);
-        if(user.isPresent()){
-            UserEntity loggingUser = user.get();
-            if(loggingUser.getEmail().equals(email) && loggingUser.getPassword().equals(password)){
-                return loggingUser;
-            }
-            return new UserEntity();
-        }
-        return user.orElse(new UserEntity());
-    }
-
-    public UserEntity saveUser(UserEntity userEntity){
-        return userRepository.save(userEntity);
-    }
-
-    public Optional<UserEntity> getUser(Long id){
-        return userRepository.findById(id);
-    }
+//    @Autowired
+//    private UserRepository userRepository;
+//
+//    public UserEntity logIn(String email, String password){
+//        Optional<UserEntity> user = userRepository.findByEmail(email);
+//        if(user.isPresent()){
+//            UserEntity loggingUser = user.get();
+//            if(loggingUser.getEmail().equals(email) && loggingUser.getPassword().equals(password)){
+//                return loggingUser;
+//            }
+//            return new UserEntity();
+//        }
+//        return user.orElse(new UserEntity());
+//    }
+//
+//    public UserEntity saveUser(UserEntity userEntity){
+//        return userRepository.save(userEntity);
+//    }
+//
+//    public Optional<UserEntity> getUser(Long id){
+//        return userRepository.findById(id);
+//    }
 }

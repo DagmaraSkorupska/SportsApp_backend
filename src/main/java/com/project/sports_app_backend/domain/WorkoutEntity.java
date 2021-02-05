@@ -1,7 +1,5 @@
 package com.project.sports_app_backend.domain;
 
-import com.sun.istack.internal.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -10,47 +8,63 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name= "WORKOUT")
-@AllArgsConstructor
+@Table(name = "WORKOUT")
 @NoArgsConstructor
 public class WorkoutEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     @Column(name = "ID")
     private Long id;
 
-    @Column(name="NAME_WORKOUT", nullable = false)
+    @Column(name = "NAME_WORKOUT", nullable = false)
     private String name;
 
-    @Column(name="DESCRIPTION")
+    @Column(name = "DESCRIPTION")
     private String description;
 
-    @Column(name="DURATION_MINUTE", nullable = false)
+    @Column(name = "DURATION_MINUTE", nullable = false)
     private int durationMin;
 
-    @Column(name="PRICE_PER_HOUR", nullable = false)
+    @Column(name = "PRICE_PER_HOUR", nullable = false)
     private double price1h;
 
-    @Column(name="DATE_OF_WORKOUT", nullable = false)
+    @Column(name = "DATE_OF_WORKOUT", nullable = false)
     private Date date;
 
     @Column(name = "ADDRESS", nullable = false)
     private String address;
 
-    @OneToMany(targetEntity = SportEntity.class,
-            mappedBy = "sportEntity",
-            cascade = CascadeType.REMOVE,
-            fetch = FetchType.LAZY)
-    private List<SportEntity> sport = new ArrayList<>();
-
-
+    private ReservationEntity reservationEntity;
+    @Access(AccessType.PROPERTY)
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "RESERVATION_ID")
-    private final ReservationEntity reservation = new ReservationEntity();
+    public ReservationEntity getReservationEntity() {
+        return reservationEntity;
+    }
 
+    public void setReservationEntity(ReservationEntity reservationEntity) {
+        this.reservationEntity = reservationEntity;
+    }
 
+    private List<SportEntity> sport = new ArrayList<>();
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = SportEntity.class,
+            mappedBy = "workouts",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    public List<SportEntity> getSport() {
+        return sport;
+    }
+
+    public WorkoutEntity(String name, String description, int durationMin, double price1h, String address, Date date) {
+        this.name = name;
+        this.description = description;
+        this.durationMin = durationMin;
+        this.price1h = price1h;
+        this.address = address;
+        this.date = new Date();
+    }
 
     public Long getId() {
         return id;
@@ -66,6 +80,14 @@ public class WorkoutEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getDurationMin() {
@@ -100,15 +122,10 @@ public class WorkoutEntity {
         this.address = address;
     }
 
-    public List<SportEntity> getSport() {
-        return sport;
-    }
 
     public void setSport(List<SportEntity> sport) {
         this.sport = sport;
     }
 
-    public ReservationEntity getReservation() {
-        return reservation;
-    }
+
 }

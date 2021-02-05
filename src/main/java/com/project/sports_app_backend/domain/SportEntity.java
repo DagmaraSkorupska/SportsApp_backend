@@ -11,11 +11,9 @@ import java.util.List;
 @NoArgsConstructor
 public class SportEntity {
 
-    private List<WorkoutEntity> workouts;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "SPORT_ID")
     private Long id;
 
     @Column(name="SPORT_TYPE", nullable = false)
@@ -24,22 +22,27 @@ public class SportEntity {
     @Column(name="DESCRIPTION", nullable = false)
     private String description;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "JOIN_SPORT_USER",
-            joinColumns = {@JoinColumn(name = "SPORT_ID", referencedColumnName = "SPORT_ID")},
-            inverseJoinColumns = {@JoinColumn(name= "USER_ID", referencedColumnName = "USER_ID")}
-    )
     private List<UserEntity> users = new ArrayList<>();
+    @Access(AccessType.PROPERTY)
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "sports")
+    public List<UserEntity> getUsers() {
+        return users;
+    }
 
+    private WorkoutEntity workouts;
+    @Access(AccessType.PROPERTY)
     @ManyToOne
-    @JoinColumn(name="WORKOUT")
-    public List<WorkoutEntity> getWorkouts() {
+    @JoinColumn(name="WORKOUTS_ID")
+    public WorkoutEntity getWorkouts() {
         return workouts;
     }
 
+    public SportEntity(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
-    public void setWorkouts(List<WorkoutEntity> workouts) {
+    public void setWorkouts(WorkoutEntity workouts) {
         this.workouts = workouts;
     }
 
@@ -65,10 +68,6 @@ public class SportEntity {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<UserEntity> getUsers() {
-        return users;
     }
 
     public void setUsers(List<UserEntity> users) {

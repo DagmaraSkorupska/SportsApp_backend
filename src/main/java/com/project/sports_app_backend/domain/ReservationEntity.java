@@ -1,35 +1,28 @@
 package com.project.sports_app_backend.domain;
 
-import com.sun.istack.internal.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "RESERVATION")
-@AllArgsConstructor
+@Table(name = "RESERVATIONS")
 @NoArgsConstructor
 public class ReservationEntity {
 
-    private UserEntity userId;
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     @Column(name = "ID")
     private long id;
 
-    @OneToOne(mappedBy = "reservation")
-    private WorkoutEntity workout;
-
+    private UserEntity userEntity;
+    @Access(AccessType.PROPERTY)
     @ManyToOne
     @JoinColumn(name = "USER_ID")
     public UserEntity getUserEntity() {
-        return userId;
+        return userEntity;
     }
+
 
     @Column(name = "TO_PAY", nullable = false)
     private double toPay;
@@ -37,6 +30,10 @@ public class ReservationEntity {
     @Column(name = "DATE_RESERVATION", nullable = false)
     private Date date;
 
+    public ReservationEntity(double toPay, Date date) {
+        this.toPay = toPay;
+        this.date = new Date();
+    }
 
     public long getId() {
         return id;
@@ -46,17 +43,8 @@ public class ReservationEntity {
         this.id = id;
     }
 
-    public WorkoutEntity getWorkout() {
-        return workout;
-    }
-
-    public void setWorkout(WorkoutEntity workout) {
-        this.workout = workout;
-    }
-
-
     public void setUserEntity(UserEntity userId) {
-        this.userId = userId;
+        this.userEntity = userId;
     }
 
     public double getToPay() {

@@ -1,41 +1,73 @@
 package com.project.sports_app_backend.domain;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "USERS")
+@NoArgsConstructor
 public class UserEntity {
-    private Long id;
-    private UserType type;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String password;
-    private String description;
-    private int phone;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "USER_ID")
+    private Long id;
+
+    @Enumerated(EnumType.STRING)
+    private UserType type;
+
+    @Column(name = "FIRSTNAME", nullable = false)
+    private String firstName;
+
+    @Column(name = "LASTNAME", nullable = false)
+    private String lastName;
+
+    @Column(name = "EMAIL", nullable = false)
+    private String email;
+
+    @Column(name = "PASSWORD", nullable = false)
+    private String password;
+
+    @Column(name = "DESCRIPTION", nullable = false)
+    private String description;
+
+    @Column(name = "PHONE", nullable = false)
+    private String phone;
+
+    private List<SportEntity> sports = new ArrayList<>();
+    @Access(AccessType.PROPERTY)
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "JOIN_SPORT_USER",
-            joinColumns = {@JoinColumn(name= "USER_ID", referencedColumnName = "USER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "SPORT_ID", referencedColumnName = "SPORT_ID")}
-    )
-    private List<SportEntity> sports = new ArrayList<>();
+            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "SPORT_ID", referencedColumnName = "SPORT_ID")})
+    public List<SportEntity> getSports() {
+        return sports;
+    }
 
+    private List<ReservationEntity> reservation = new ArrayList<>();
+    @Access(AccessType.PROPERTY)
     @OneToMany(
             targetEntity = ReservationEntity.class,
             mappedBy = "userEntity",
-            cascade = CascadeType.REMOVE,
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    private List<ReservationEntity> reservation = new ArrayList<>();
+    public List<ReservationEntity> getReservation() {
+        return reservation;
+    }
 
-
-
-
-
-
-
+    public UserEntity(UserType type, String firstName, String lastName, String email, String password, String description, String phone) {
+        this.type = type;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.description = description;
+        this.phone = phone;
+    }
 
     public Long getId() {
         return id;
@@ -93,24 +125,18 @@ public class UserEntity {
         this.description = description;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public List<SportEntity> getSports() {
-        return sports;
-    }
+
 
     public void setSports(List<SportEntity> sports) {
         this.sports = sports;
-    }
-
-    public List<ReservationEntity> getReservation() {
-        return reservation;
     }
 
     public void setReservation(List<ReservationEntity> reservation) {
