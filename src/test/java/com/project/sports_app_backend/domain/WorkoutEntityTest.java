@@ -1,12 +1,13 @@
 package com.project.sports_app_backend.domain;
 
 import com.project.sports_app_backend.repository.WorkoutRepository;
-import org.junit.Assert;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.testng.Assert;
 
 import java.util.Date;
 
@@ -19,7 +20,7 @@ public class WorkoutEntityTest {
     @Test
     public void saveNewWorkoutTest(){
         //Given
-        WorkoutEntity workout1 = new WorkoutEntity("Swim","desc" ,60, 100, "address1", new Date(2020,02,20));
+        WorkoutEntity workout1 = new WorkoutEntity("Swim","desc" ,60, 100,  new Date(2020,02,20), "address1");
         workoutRepository.save(workout1);
 
         //When
@@ -37,7 +38,7 @@ public class WorkoutEntityTest {
     @Test
     public void deleteWorkoutTest(){
         //Given
-        WorkoutEntity workout1 = new WorkoutEntity("Swim","desc" ,60, 100, "address1", new Date(2020,02,20));
+        WorkoutEntity workout1 = new WorkoutEntity("Swim","desc" ,60, 100,  new Date(2020,02,20),"address1");
         workoutRepository.save(workout1);
 
         //When

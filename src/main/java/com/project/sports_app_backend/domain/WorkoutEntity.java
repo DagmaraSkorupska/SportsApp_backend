@@ -35,6 +35,20 @@ public class WorkoutEntity {
     @Column(name = "ADDRESS", nullable = false)
     private String address;
 
+    private List<SportEntity> sport = new ArrayList<>();
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = SportEntity.class,
+            mappedBy = "workouts",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    public List<SportEntity> getSport() {
+        return sport;
+    }
+
+    public void setSport(List<SportEntity> sport) {
+        this.sport = sport;
+    }
+
     private ReservationEntity reservationEntity;
     @Access(AccessType.PROPERTY)
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -47,23 +61,15 @@ public class WorkoutEntity {
         this.reservationEntity = reservationEntity;
     }
 
-    private List<SportEntity> sport = new ArrayList<>();
-    @Access(AccessType.PROPERTY)
-    @OneToMany(targetEntity = SportEntity.class,
-            mappedBy = "workouts",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY)
-    public List<SportEntity> getSport() {
-        return sport;
-    }
 
-    public WorkoutEntity(String name, String description, int durationMin, double price1h, String address, Date date) {
+
+    public WorkoutEntity(String name, String description, int durationMin, double price1h, Date date, String address) {
         this.name = name;
         this.description = description;
         this.durationMin = durationMin;
         this.price1h = price1h;
-        this.address = address;
         this.date = new Date();
+        this.address = address;
     }
 
     public Long getId() {
@@ -123,9 +129,7 @@ public class WorkoutEntity {
     }
 
 
-    public void setSport(List<SportEntity> sport) {
-        this.sport = sport;
-    }
+
 
 
 }

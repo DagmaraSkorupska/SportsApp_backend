@@ -20,7 +20,4 @@ public class WorkoutDto {
     private Date date;
     private String address;
     private List<SportEntity> sport;
-    private ReservationEntity reservation;
-
-
 }

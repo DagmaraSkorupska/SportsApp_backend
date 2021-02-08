@@ -9,23 +9,23 @@ import java.util.Optional;
 
 @Service
 public class SportService {
-//    @Autowired
-//    SportRepository sportRepository;
-//
-//    public Iterable<SportEntity> getAllSports(){
-//        return sportRepository.findAll();
-//    }
-//
-//    public Optional<SportEntity> getSport(Long id){
-//        return  sportRepository.findById(id);
-//    }
-//
-//    public SportEntity saveSport(SportEntity sportEntity){
-//        return sportRepository.save(sportEntity);
-//    }
-//
-//    public void deleteSport(Long id){
-//        sportRepository.deleteById(id);
-//    }
+    @Autowired
+    SportRepository sportRepository;
+
+    public Iterable<SportEntity> getAllSports(){
+        return sportRepository.findAll();
+    }
+
+    public Optional<SportEntity> getSport(Long id){
+        return  sportRepository.findById(id);
+    }
+
+    public SportEntity saveSport(SportEntity sportEntity){
+        return sportRepository.save(sportEntity);
+    }
+
+    public void deleteSport(Long id){
+        sportRepository.deleteById(id);
+    }
 
 }

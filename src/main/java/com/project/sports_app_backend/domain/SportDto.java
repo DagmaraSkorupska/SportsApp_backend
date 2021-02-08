@@ -14,4 +14,5 @@ public class SportDto {
     private String name;
     private String description;
     private List<UserEntity> users;
+    private WorkoutEntity workouts;
 }
