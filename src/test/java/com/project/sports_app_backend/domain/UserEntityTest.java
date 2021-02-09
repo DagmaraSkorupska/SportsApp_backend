@@ -19,7 +19,7 @@ public class UserEntityTest {
     @Test
     public void saveNewUserTest() {
         //Given
-        UserEntity user1 = new UserEntity(USER, "user1", "abc", "test@mail.com", "password1", "desc", "1324679");
+        UserEntity user1 = new UserEntity(USER, "user1", "abc", "test@mail.com", "password1", "desc", "1324679", null);
         userRepository.save(user1);
 
         //When
@@ -35,7 +35,7 @@ public class UserEntityTest {
     @Test
     public void deleteUserTest(){
         //Given
-        UserEntity user1 = new UserEntity(USER, "user1", "abc", "test@mail.com", "password1", "desc", "1324679");
+        UserEntity user1 = new UserEntity(USER, "user1", "abc", "test@mail.com", "password1", "desc", "1324679", null);
         userRepository.save(user1);
 
         //When

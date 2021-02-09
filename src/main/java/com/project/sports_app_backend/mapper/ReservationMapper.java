@@ -6,6 +6,9 @@ import com.project.sports_app_backend.domain.WorkoutDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class ReservationMapper {
     @Autowired
@@ -16,9 +19,6 @@ public class ReservationMapper {
 
     public ReservationEntity mapToReservationEntity(final ReservationDto reservationDto){
         return new ReservationEntity(
-                reservationDto.getId(),
-                workoutMapper.mapToWorkoutEntity(reservationDto.getWorkoutId()),
-                userMapper.mapToUserEntity(reservationDto.getUserId()),
                 reservationDto.getToPay(),
                 reservationDto.getDate()
         );
@@ -32,5 +32,17 @@ public class ReservationMapper {
                 reservationEntity.getToPay(),
                 reservationEntity.getDate()
         );
+    }
+
+    public List<ReservationDto> mapToReservationDtoList(List<ReservationEntity> reservationEntity){
+        return reservationEntity.stream()
+                .map(reservation -> new ReservationDto(
+                        reservation.getId(),
+                        new WorkoutDto(),
+                        userMapper.mapToUserDto(reservation.getUserEntity()),
+                        reservation.getToPay(),
+                        reservation.getDate()
+                ))
+                .collect(Collectors.toList());
     }
 }

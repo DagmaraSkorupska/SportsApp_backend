@@ -37,9 +37,10 @@ public class SportEntity {
         return workouts;
     }
 
-    public SportEntity(String name, String description) {
+    public SportEntity(String name, String description, List<UserEntity> users) {
         this.name = name;
         this.description = description;
+        this.users = users;
     }
 
     public void setWorkouts(WorkoutEntity workouts) {

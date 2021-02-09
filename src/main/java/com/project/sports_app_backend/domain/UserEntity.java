@@ -59,7 +59,7 @@ public class UserEntity {
         return reservation;
     }
 
-    public UserEntity(UserType type, String firstName, String lastName, String email, String password, String description, String phone) {
+    public UserEntity(UserType type, String firstName, String lastName, String email, String password, String description, String phone, List<SportEntity> sports) {
         this.type = type;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -67,6 +67,7 @@ public class UserEntity {
         this.password = password;
         this.description = description;
         this.phone = phone;
+        this.sports = sports;
     }
 
     public Long getId() {

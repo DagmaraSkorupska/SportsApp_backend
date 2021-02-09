@@ -13,6 +13,6 @@ public class SportDto {
     private Long id;
     private String name;
     private String description;
-    private List<UserEntity> users;
-    private WorkoutEntity workouts;
+    private List<UserDto> users;
+    private WorkoutDto workouts;
 }

@@ -18,6 +18,7 @@ public class UserDto {
     private String password;
     private String description;
     private String phone;
-    private List<SportEntity> sportId;
+    private List<SportDto> sportId;
+
 }
 

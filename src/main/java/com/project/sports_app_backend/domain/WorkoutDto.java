@@ -19,5 +19,5 @@ public class WorkoutDto {
     private double price1h;
     private Date date;
     private String address;
-    private List<SportEntity> sport;
+    private List<SportDto> sport;
 }
