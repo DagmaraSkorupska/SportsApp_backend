@@ -1,14 +1,14 @@
 package com.project.sports_app_backend.domain;
 
 import com.project.sports_app_backend.repository.SportRepository;
-import org.junit.Assert;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
 @SpringBootTest
 public class SportEntityTest {
     @Autowired
@@ -17,7 +17,7 @@ public class SportEntityTest {
     @Test
     public void saveNewSport(){
         //Given
-        SportEntity sport1 = new SportEntity("Swim", "desc",null);
+        SportEntity sport1 = new SportEntity("Swim", "desc",null, null);
         sportRepository.save(sport1);
 
         //When
@@ -25,8 +25,8 @@ public class SportEntityTest {
         String nameSports = sport1.getName();
 
         //Then
-        Assert.assertEquals(1, countSports);
-        Assert.assertEquals("Swim", nameSports);
+        assertEquals(1, countSports);
+        assertEquals("Swim", nameSports);
 
         //CleanUp
         sportRepository.deleteAll();
@@ -35,7 +35,7 @@ public class SportEntityTest {
     @Test
     public void deleteSport(){
         //Given
-        SportEntity sport1 = new SportEntity("Swim", "desc", null);
+        SportEntity sport1 = new SportEntity("Swim", "desc", null, null);
         sportRepository.save(sport1);
 
         //When
@@ -43,7 +43,7 @@ public class SportEntityTest {
         long countSports = sportRepository.count();
 
         //Then
-        Assert.assertEquals(0, countSports);
+        assertEquals(0, countSports);
 
         //CleanUp
         sportRepository.deleteAll();

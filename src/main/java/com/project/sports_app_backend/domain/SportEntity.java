@@ -13,7 +13,7 @@ public class SportEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "SPORT_ID")
+    @Column(name = "SPORT_ID", nullable = false)
     private Long id;
 
     @Column(name="SPORT_TYPE", nullable = false)
@@ -37,10 +37,11 @@ public class SportEntity {
         return workouts;
     }
 
-    public SportEntity(String name, String description, List<UserEntity> users) {
+    public SportEntity(String name, String description, List<UserEntity> users, WorkoutEntity workouts) {
         this.name = name;
         this.description = description;
         this.users = users;
+        this.workouts = workouts;
     }
 
     public void setWorkouts(WorkoutEntity workouts) {

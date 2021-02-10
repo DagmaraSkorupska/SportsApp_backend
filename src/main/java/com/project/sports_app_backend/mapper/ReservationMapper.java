@@ -17,14 +17,16 @@ public class ReservationMapper {
     @Autowired
     private UserMapper userMapper;
 
-    public ReservationEntity mapToReservationEntity(final ReservationDto reservationDto){
+    public ReservationEntity mapToReservationEntity( ReservationDto reservationDto)  {
         return new ReservationEntity(
                 reservationDto.getToPay(),
-                reservationDto.getDate()
+                reservationDto.getDate(),
+                workoutMapper.mapToWorkoutEntity(reservationDto.getWorkoutId()),
+                userMapper.mapToUserEntity(reservationDto.getUserId())
         );
     }
 
-    public ReservationDto mapToReservationDto(final ReservationEntity reservationEntity){
+    public ReservationDto mapToReservationDto( ReservationEntity reservationEntity){
         return new ReservationDto(
                 reservationEntity.getId(),
                 new WorkoutDto(),
@@ -43,6 +45,17 @@ public class ReservationMapper {
                         reservation.getToPay(),
                         reservation.getDate()
                 ))
+                .collect(Collectors.toList());
+    }
+
+    public List<ReservationEntity> mapToReservationEntityList(List<ReservationDto> reservationDtos){
+        return reservationDtos.stream()
+                .map(reservationDto -> new ReservationEntity(
+                                reservationDto.getToPay(),
+                                reservationDto.getDate(),
+                                workoutMapper.mapToWorkoutEntity(reservationDto.getWorkoutId()),
+                                userMapper.mapToUserEntity(reservationDto.getUserId())
+                    ))
                 .collect(Collectors.toList());
     }
 }

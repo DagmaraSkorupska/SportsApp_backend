@@ -14,7 +14,7 @@ public class WorkoutEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     private Long id;
 
     @Column(name = "NAME_WORKOUT", nullable = false)
@@ -61,15 +61,14 @@ public class WorkoutEntity {
         this.reservationEntity = reservationEntity;
     }
 
-
-
-    public WorkoutEntity(String name, String description, int durationMin, double price1h, Date date, String address) {
+    public WorkoutEntity(String name, String description, int durationMin, double price1h, Date date, String address, List<SportEntity> sport, ReservationEntity reservationEntity ) {
         this.name = name;
         this.description = description;
         this.durationMin = durationMin;
         this.price1h = price1h;
         this.date = new Date();
         this.address = address;
+        this.reservationEntity = reservationEntity;
     }
 
     public Long getId() {

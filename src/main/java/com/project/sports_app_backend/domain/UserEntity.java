@@ -13,7 +13,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "USER_ID")
+    @Column(name = "USER_ID", nullable = false)
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -59,7 +59,7 @@ public class UserEntity {
         return reservation;
     }
 
-    public UserEntity(UserType type, String firstName, String lastName, String email, String password, String description, String phone, List<SportEntity> sports) {
+    public UserEntity(UserType type, String firstName, String lastName, String email, String password, String description, String phone, List<SportEntity> sports, List<ReservationEntity> reservation) {
         this.type = type;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -68,6 +68,7 @@ public class UserEntity {
         this.description = description;
         this.phone = phone;
         this.sports = sports;
+        this.reservation = reservation;
     }
 
     public Long getId() {

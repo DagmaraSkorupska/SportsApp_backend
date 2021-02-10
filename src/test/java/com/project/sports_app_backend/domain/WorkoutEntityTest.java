@@ -1,17 +1,18 @@
 package com.project.sports_app_backend.domain;
 
 import com.project.sports_app_backend.repository.WorkoutRepository;
-
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.testng.Assert;
 
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-@RunWith(SpringRunner.class)
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
 @SpringBootTest
 public class WorkoutEntityTest {
     @Autowired
@@ -20,7 +21,8 @@ public class WorkoutEntityTest {
     @Test
     public void saveNewWorkoutTest(){
         //Given
-        WorkoutEntity workout1 = new WorkoutEntity("Swim","desc" ,60, 100,  new Date(2020,02,20), "address1");
+        List<SportEntity> sportEntityList = new ArrayList<>();
+        WorkoutEntity workout1 = new WorkoutEntity("Swim","desc" ,60, 100,  new Date(2020,02,20), "address1", sportEntityList, null);
         workoutRepository.save(workout1);
 
         //When
@@ -28,8 +30,8 @@ public class WorkoutEntityTest {
         String nameWorkout1 = workout1.getName();
 
         //Then
-        Assert.assertEquals(1, countWorkout);
-        Assert.assertEquals("Swim", nameWorkout1);
+        assertEquals(1, countWorkout);
+        assertEquals("Swim", nameWorkout1);
 
         //CleanUp
         workoutRepository.deleteAll();
@@ -38,7 +40,8 @@ public class WorkoutEntityTest {
     @Test
     public void deleteWorkoutTest(){
         //Given
-        WorkoutEntity workout1 = new WorkoutEntity("Swim","desc" ,60, 100,  new Date(2020,02,20),"address1");
+        List<SportEntity> sportDtos = new ArrayList<>();
+        WorkoutEntity workout1 = new WorkoutEntity("Swim","desc" ,60, 100,  new Date(2020,02,20),"address1", sportDtos, null);
         workoutRepository.save(workout1);
 
         //When
@@ -46,7 +49,7 @@ public class WorkoutEntityTest {
         long countWorkout = workoutRepository.count();
 
         //Then
-        Assert.assertEquals(0, countWorkout);
+        assertEquals(0, countWorkout);
 
         //CleanUp
         workoutRepository.deleteAll();

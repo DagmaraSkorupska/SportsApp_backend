@@ -33,11 +33,11 @@ public class SportsController {
 //    public SportDto getSport(@RequestParam Long sportId){
 //        return sportMapper.mapcostam(sportService.getSport(sportId));
 //    }
-//
-////    @RequestMapping(method = RequestMethod.PUT, value = "updateSport")
-////    public SportDto updateSport(@RequestBody SportDto sportDto){
-////        return sportMapper/mapcostam(sportService.)
-////    }
+
+//    @RequestMapping(method = RequestMethod.PUT, value = "updateSport")
+//    public SportDto updateSport(@RequestBody SportDto sportDto){
+//        return sportMapper/mapcostam(sportService.)
+//    }
 
 
 }

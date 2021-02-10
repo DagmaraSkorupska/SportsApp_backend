@@ -1,8 +1,11 @@
 package com.project.sports_app_backend.domain;
 
+
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
 
 import java.util.List;
 
@@ -19,6 +22,5 @@ public class UserDto {
     private String description;
     private String phone;
     private List<SportDto> sportId;
-
+    private List<ReservationDto> reservationDtos;
 }
-

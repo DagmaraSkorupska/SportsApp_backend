@@ -1,5 +1,7 @@
 package com.project.sports_app_backend.mapper;
 
+import com.project.sports_app_backend.controller.ReservationNotFoundException;
+import com.project.sports_app_backend.controller.SportNotFoundException;
 import com.project.sports_app_backend.domain.SportDto;
 import com.project.sports_app_backend.domain.SportEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +19,16 @@ public class SportMapper {
     @Autowired
     private WorkoutMapper workoutMapper;
 
-    public SportEntity mapToSportEntity(final SportDto sportDto){
+    public SportEntity mapToSportEntity( SportDto sportDto) {
         return new SportEntity(
                 sportDto.getName(),
                 sportDto.getDescription(),
-                userMapper.mapToUserEntityList(sportDto.getUsers())
+                userMapper.mapToUserEntityList(sportDto.getUsers()),
+                workoutMapper.mapToWorkoutEntity(sportDto.getWorkouts())
         );
     }
 
-    public SportDto mapToSportDto(final SportEntity sportEntity){
+    public SportDto mapToSportDto( SportEntity sportEntity){
         return new SportDto(
                 sportEntity.getId(),
                 sportEntity.getName(),
@@ -35,7 +38,7 @@ public class SportMapper {
         );
     }
 
-    public List<SportDto> mapToSportDtoList(final List<SportEntity> sportEntities){
+    public List<SportDto> mapToSportDtoList( List<SportEntity> sportEntities){
         return sportEntities.stream()
                 .map(sport -> new SportDto(
                         sport.getId(),
@@ -48,15 +51,15 @@ public class SportMapper {
                 .collect(Collectors.toList());
     }
 
-    public List<SportEntity> mapToSportEntityList(final List<SportDto> sportDtos){
+    public List<SportEntity> mapToSportEntityList(List<SportDto> sportDtos) {
         return sportDtos.stream()
-                .map(sport -> new SportEntity(
-                                sport.getName(),
-                                sport.getDescription(),
-                                userMapper.mapToUserEntityList(sport.getUsers())
-                        )
-                )
+                .map(sport -> {
+                    return new SportEntity(
+                            sport.getName(),
+                            sport.getDescription(),
+                            userMapper.mapToUserEntityList(sport.getUsers()),
+                            workoutMapper.mapToWorkoutEntity(sport.getWorkouts()));
+                })
                 .collect(Collectors.toList());
     }
-
 }

@@ -12,7 +12,7 @@ public class ReservationEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID")
+    @Column(name = "ID", nullable = false)
     private long id;
 
     private UserEntity userEntity;
@@ -23,16 +23,16 @@ public class ReservationEntity {
         return userEntity;
     }
 
-
     @Column(name = "TO_PAY", nullable = false)
     private double toPay;
 
     @Column(name = "DATE_RESERVATION", nullable = false)
     private Date date;
 
-    public ReservationEntity(double toPay, Date date) {
+    public ReservationEntity(double toPay, Date date, WorkoutEntity workoutEntity, UserEntity userEntity  ) {
         this.toPay = toPay;
         this.date = new Date();
+        this.userEntity = userEntity;
     }
 
     public long getId() {
