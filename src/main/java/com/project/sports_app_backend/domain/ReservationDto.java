@@ -14,4 +14,5 @@ public class ReservationDto {
     private double toPay;
     private Date date;
     private UserDto userId;
+    private WorkoutDto workoutDto;
 }

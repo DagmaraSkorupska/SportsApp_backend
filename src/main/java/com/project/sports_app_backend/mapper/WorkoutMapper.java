@@ -34,8 +34,7 @@ public class WorkoutMapper {
                 workoutEntity.getDescription(),
                 workoutEntity.getDurationMin(),
                 workoutEntity.getPrice1h(),
-                workoutEntity.getAddress(),
-                reservationMapper.mapToReservationDto(workoutEntity.getReservationEntity())
+                workoutEntity.getAddress()
         );
     }
 

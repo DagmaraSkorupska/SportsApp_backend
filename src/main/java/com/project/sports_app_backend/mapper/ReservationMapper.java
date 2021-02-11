@@ -21,7 +21,8 @@ public class ReservationMapper {
         return new ReservationEntity(
                 reservationDto.getToPay(),
                 reservationDto.getDate(),
-                userMapper.mapToUserEntity(reservationDto.getUserId())
+                userMapper.mapToUserEntity(reservationDto.getUserId()),
+                workoutMapper.mapToWorkoutEntity(reservationDto.getWorkoutDto())
         );
     }
 
@@ -30,7 +31,8 @@ public class ReservationMapper {
                 reservationEntity.getId(),
                 reservationEntity.getToPay(),
                 reservationEntity.getDate(),
-                userMapper.mapToUserDto(reservationEntity.getUserEntity())
+                userMapper.mapToUserDto(reservationEntity.getUserEntity()),
+                workoutMapper.mapToWorkoutDto(reservationEntity.getWorkoutEntity())
         );
     }
 
@@ -40,7 +42,8 @@ public class ReservationMapper {
                         reservation.getId(),
                         reservation.getToPay(),
                         reservation.getDate(),
-                        userMapper.mapToUserDto(reservation.getUserEntity())
+                        userMapper.mapToUserDto(reservation.getUserEntity()),
+                        workoutMapper.mapToWorkoutDto(reservation.getWorkoutEntity())
                 ))
                 .collect(Collectors.toList());
     }
@@ -50,7 +53,8 @@ public class ReservationMapper {
                 .map(reservationDto -> new ReservationEntity(
                                 reservationDto.getToPay(),
                                 reservationDto.getDate(),
-                                userMapper.mapToUserEntity(reservationDto.getUserId())
+                                userMapper.mapToUserEntity(reservationDto.getUserId()),
+                                workoutMapper.mapToWorkoutEntity(reservationDto.getWorkoutDto())
                     ))
                 .collect(Collectors.toList());
     }

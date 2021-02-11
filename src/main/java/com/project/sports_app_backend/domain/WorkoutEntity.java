@@ -31,7 +31,6 @@ public class WorkoutEntity {
     @Column(name = "ADDRESS", nullable = false)
     private String address;
 
-
     private List<SportEntity> sport = new ArrayList<>();
     @Access(AccessType.PROPERTY)
     @OneToMany(targetEntity = SportEntity.class,
@@ -46,17 +45,17 @@ public class WorkoutEntity {
         this.sport = sport;
     }
 
-    private ReservationEntity reservationEntity = new ReservationEntity();
-    @Access(AccessType.PROPERTY)
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "RESERVATION_ID")
-    public ReservationEntity getReservationEntity() {
-        return reservationEntity;
-    }
-
-    public void setReservationEntity(ReservationEntity reservationEntity) {
-        this.reservationEntity = reservationEntity;
-    }
+//    private ReservationEntity reservationEntity = new ReservationEntity();
+//    @Access(AccessType.PROPERTY)
+//    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinColumn(name = "RESERVATION_ID")
+//    public ReservationEntity getReservationEntity() {
+//        return reservationEntity;
+//    }
+//
+//    public void setReservationEntity(ReservationEntity reservationEntity) {
+//        this.reservationEntity = reservationEntity;
+//    }
 
     public WorkoutEntity(String name, String description, int durationMin, double price1h, String address, List<SportEntity> sport) {
         this.name = name;

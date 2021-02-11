@@ -19,7 +19,7 @@ public class ReservationMapperTest {
     @Test
     public void testMapToReservationEntity(){
         //given
-        ReservationDto reservationDto = new ReservationDto(1L,  25, new Date(), new UserDto());
+        ReservationDto reservationDto = new ReservationDto(1L,  25, new Date(), new UserDto(), new WorkoutDto());
         //when
         ReservationEntity reservationEntity = reservationMapper.mapToReservationEntity(reservationDto);
         double toPay = reservationEntity.getToPay();
@@ -30,7 +30,7 @@ public class ReservationMapperTest {
     @Test
     public void testMapToReservationDto(){
         //given
-        ReservationEntity reservationEntity = new ReservationEntity(10, new Date(), new UserEntity());
+        ReservationEntity reservationEntity = new ReservationEntity(10, new Date(), new UserEntity(), new WorkoutEntity());
         //when
         ReservationDto reservationDto = reservationMapper.mapToReservationDto(reservationEntity);
         double toPay = reservationDto.getToPay();
@@ -42,7 +42,7 @@ public class ReservationMapperTest {
     public void testMapToReservationDtoList(){
         //given
         List<ReservationEntity> reservationEntities = new ArrayList<>();
-        reservationEntities.add(new ReservationEntity(10,new Date(), new UserEntity()));
+        reservationEntities.add(new ReservationEntity(10,new Date(), new UserEntity(), new WorkoutEntity()));
         //when
         List<ReservationDto> reservationDtos = reservationMapper.mapToReservationDtoList(reservationEntities);
         int size = reservationDtos.size();

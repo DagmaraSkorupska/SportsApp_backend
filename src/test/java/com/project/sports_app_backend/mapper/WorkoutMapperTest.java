@@ -23,7 +23,7 @@ public class WorkoutMapperTest {
         //given
         List<SportDto> sportDtos = new ArrayList<>();
         WorkoutDto workoutDto = new WorkoutDto(1L, "name", "desc", 60,
-                100, "address", null);
+                100, "address");
         //when
         WorkoutEntity workoutEntity = workoutMapper.mapToWorkoutEntity(workoutDto);
         String name = workoutEntity.getName();

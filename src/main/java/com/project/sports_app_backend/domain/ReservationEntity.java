@@ -1,11 +1,10 @@
 package com.project.sports_app_backend.domain;
 
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+
 
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -39,11 +38,24 @@ public class ReservationEntity {
         this.userEntity = userId;
     }
 
+    private WorkoutEntity workoutEntity = new WorkoutEntity();
+    @Access(AccessType.PROPERTY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "WORKOUT_ID")
+    public WorkoutEntity getWorkoutEntity() {
+        return workoutEntity;
+    }
 
-    public ReservationEntity(double toPay, Date date, UserEntity userEntity) {
+    public void setWorkoutEntity(WorkoutEntity workoutEntity) {
+        this.workoutEntity = workoutEntity;
+    }
+
+
+    public ReservationEntity(double toPay, Date date, UserEntity userEntity, WorkoutEntity workoutEntity) {
         this.toPay = toPay;
         this.date = new Date();
         this.userEntity = userEntity;
+        this.workoutEntity = workoutEntity;
     }
 
     public long getId() {

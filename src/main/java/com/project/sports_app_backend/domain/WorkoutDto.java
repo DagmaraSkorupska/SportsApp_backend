@@ -19,5 +19,4 @@ public class WorkoutDto {
     private double price1h;
     private String address;
     private final List<SportDto> sport = new ArrayList<>();
-    private ReservationDto reservationId ;
 }
