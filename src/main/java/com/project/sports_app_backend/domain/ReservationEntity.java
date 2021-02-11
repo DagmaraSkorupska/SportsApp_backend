@@ -1,13 +1,17 @@
 package com.project.sports_app_backend.domain;
 
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Table(name = "RESERVATIONS")
 @NoArgsConstructor
+
 public class ReservationEntity {
 
     @Id
@@ -15,7 +19,15 @@ public class ReservationEntity {
     @Column(name = "ID", nullable = false)
     private long id;
 
-    private UserEntity userEntity;
+    @Column(name = "TO_PAY", nullable = false)
+    private double toPay;
+
+    @GeneratedValue
+    @Column(name = "DATE_RESERVATION", nullable = false)
+    private Date date;
+
+    private UserEntity userEntity = new UserEntity();
+
     @Access(AccessType.PROPERTY)
     @ManyToOne
     @JoinColumn(name = "USER_ID")
@@ -23,13 +35,12 @@ public class ReservationEntity {
         return userEntity;
     }
 
-    @Column(name = "TO_PAY", nullable = false)
-    private double toPay;
+    public void setUserEntity(UserEntity userId) {
+        this.userEntity = userId;
+    }
 
-    @Column(name = "DATE_RESERVATION", nullable = false)
-    private Date date;
 
-    public ReservationEntity(double toPay, Date date, WorkoutEntity workoutEntity, UserEntity userEntity  ) {
+    public ReservationEntity(double toPay, Date date, UserEntity userEntity) {
         this.toPay = toPay;
         this.date = new Date();
         this.userEntity = userEntity;
@@ -41,10 +52,6 @@ public class ReservationEntity {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public void setUserEntity(UserEntity userId) {
-        this.userEntity = userId;
     }
 
     public double getToPay() {

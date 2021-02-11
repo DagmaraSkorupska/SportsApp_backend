@@ -4,7 +4,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -29,11 +28,9 @@ public class WorkoutEntity {
     @Column(name = "PRICE_PER_HOUR", nullable = false)
     private double price1h;
 
-    @Column(name = "DATE_OF_WORKOUT", nullable = false)
-    private Date date;
-
     @Column(name = "ADDRESS", nullable = false)
     private String address;
+
 
     private List<SportEntity> sport = new ArrayList<>();
     @Access(AccessType.PROPERTY)
@@ -49,7 +46,7 @@ public class WorkoutEntity {
         this.sport = sport;
     }
 
-    private ReservationEntity reservationEntity;
+    private ReservationEntity reservationEntity = new ReservationEntity();
     @Access(AccessType.PROPERTY)
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "RESERVATION_ID")
@@ -61,14 +58,13 @@ public class WorkoutEntity {
         this.reservationEntity = reservationEntity;
     }
 
-    public WorkoutEntity(String name, String description, int durationMin, double price1h, Date date, String address, List<SportEntity> sport, ReservationEntity reservationEntity ) {
+    public WorkoutEntity(String name, String description, int durationMin, double price1h, String address, List<SportEntity> sport) {
         this.name = name;
         this.description = description;
         this.durationMin = durationMin;
         this.price1h = price1h;
-        this.date = new Date();
         this.address = address;
-        this.reservationEntity = reservationEntity;
+        this.sport = sport;
     }
 
     public Long getId() {
@@ -111,13 +107,6 @@ public class WorkoutEntity {
         this.price1h = price1h;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public String getAddress() {
         return address;

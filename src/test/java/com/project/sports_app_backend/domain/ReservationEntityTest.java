@@ -1,14 +1,12 @@
 package com.project.sports_app_backend.domain;
 
 import com.project.sports_app_backend.repository.ReservationRepository;
-import com.project.sports_app_backend.repository.UserRepository;
-import com.project.sports_app_backend.repository.WorkoutRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
-
+import java.time.Instant;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,17 +18,11 @@ public class ReservationEntityTest {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    @Autowired
-    private WorkoutRepository workoutRepository;
-
-    @Autowired
-    private UserRepository userRepository;
-
 
     @Test
     public void testSaveReservation() {
         //Given
-        ReservationEntity reservationEntity1 = new ReservationEntity(120, new Date(2020,5,23), null, null);
+        ReservationEntity reservationEntity1 = new ReservationEntity(120, Date.from(Instant.now()), null);
         reservationRepository.save(reservationEntity1);
 
         //When
@@ -46,7 +38,7 @@ public class ReservationEntityTest {
     @Test
     public void testDeleteReservation(){
         //Given
-        ReservationEntity reservationEntity1 = new ReservationEntity(120, new Date(2020,5,23), null, null);
+        ReservationEntity reservationEntity1 = new ReservationEntity(120, Date.from(Instant.now()), null);
         reservationRepository.save(reservationEntity1);
 
         //When

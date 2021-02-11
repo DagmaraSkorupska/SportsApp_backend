@@ -7,6 +7,7 @@ import com.project.sports_app_backend.domain.SportEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,7 +34,6 @@ public class SportMapper {
                 sportEntity.getId(),
                 sportEntity.getName(),
                 sportEntity.getDescription(),
-                userMapper.mapToUserDtoList(sportEntity.getUsers()),
                 workoutMapper.mapToWorkoutDto(sportEntity.getWorkouts())
         );
     }
@@ -44,22 +44,19 @@ public class SportMapper {
                         sport.getId(),
                         sport.getName(),
                         sport.getDescription(),
-                        userMapper.mapToUserDtoList(sport.getUsers()),
-                        workoutMapper.mapToWorkoutDto(sport.getWorkouts())
-                        )
+                        workoutMapper.mapToWorkoutDto(sport.getWorkouts()))
                 )
                 .collect(Collectors.toList());
     }
 
     public List<SportEntity> mapToSportEntityList(List<SportDto> sportDtos) {
         return sportDtos.stream()
-                .map(sport -> {
-                    return new SportEntity(
-                            sport.getName(),
-                            sport.getDescription(),
-                            userMapper.mapToUserEntityList(sport.getUsers()),
-                            workoutMapper.mapToWorkoutEntity(sport.getWorkouts()));
-                })
+                .map(sport -> new SportEntity(
+                        sport.getName(),
+                        sport.getDescription(),
+                        userMapper.mapToUserEntityList(sport.getUsers()),
+                        workoutMapper.mapToWorkoutEntity(sport.getWorkouts()))
+                )
                 .collect(Collectors.toList());
     }
 }

@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -21,6 +22,6 @@ public class UserDto {
     private String password;
     private String description;
     private String phone;
-    private List<SportDto> sportId;
-    private List<ReservationDto> reservationDtos;
+    private final List<SportDto> sportId= new ArrayList<>() ;
+    private final List<ReservationDto> reservationDtos= new ArrayList<>() ;
 }

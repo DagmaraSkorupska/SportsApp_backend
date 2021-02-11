@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -13,6 +14,6 @@ public class SportDto {
     private Long id;
     private String name;
     private String description;
-    private List<UserDto> users;
-    private WorkoutDto workouts;
+    private final List<UserDto> users = new ArrayList<>();
+    private WorkoutDto workouts ;
 }

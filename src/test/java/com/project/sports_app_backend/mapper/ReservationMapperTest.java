@@ -1,7 +1,5 @@
 package com.project.sports_app_backend.mapper;
 
-import com.project.sports_app_backend.controller.ReservationNotFoundException;
-import com.project.sports_app_backend.controller.SportNotFoundException;
 import com.project.sports_app_backend.domain.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 @SpringBootTest
 public class ReservationMapperTest {
@@ -23,7 +19,7 @@ public class ReservationMapperTest {
     @Test
     public void testMapToReservationEntity(){
         //given
-        ReservationDto reservationDto = new ReservationDto(1L, new WorkoutDto(), new UserDto(), 25, new Date());
+        ReservationDto reservationDto = new ReservationDto(1L,  25, new Date(), new UserDto());
         //when
         ReservationEntity reservationEntity = reservationMapper.mapToReservationEntity(reservationDto);
         double toPay = reservationEntity.getToPay();
@@ -34,7 +30,7 @@ public class ReservationMapperTest {
     @Test
     public void testMapToReservationDto(){
         //given
-        ReservationEntity reservationEntity = new ReservationEntity(10, new Date(), new WorkoutEntity(), new UserEntity());
+        ReservationEntity reservationEntity = new ReservationEntity(10, new Date(), new UserEntity());
         //when
         ReservationDto reservationDto = reservationMapper.mapToReservationDto(reservationEntity);
         double toPay = reservationDto.getToPay();
@@ -46,7 +42,7 @@ public class ReservationMapperTest {
     public void testMapToReservationDtoList(){
         //given
         List<ReservationEntity> reservationEntities = new ArrayList<>();
-        reservationEntities.add(new ReservationEntity(10,new Date(), new WorkoutEntity(), new UserEntity()));
+        reservationEntities.add(new ReservationEntity(10,new Date(), new UserEntity()));
         //when
         List<ReservationDto> reservationDtos = reservationMapper.mapToReservationDtoList(reservationEntities);
         int size = reservationDtos.size();

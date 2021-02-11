@@ -29,7 +29,7 @@ public class SportEntity {
         return users;
     }
 
-    private WorkoutEntity workouts;
+    private WorkoutEntity workouts = new WorkoutEntity();
     @Access(AccessType.PROPERTY)
     @ManyToOne
     @JoinColumn(name="WORKOUTS_ID")
@@ -37,14 +37,14 @@ public class SportEntity {
         return workouts;
     }
 
+    public void setWorkouts(WorkoutEntity workouts) {
+        this.workouts = workouts;
+    }
+
     public SportEntity(String name, String description, List<UserEntity> users, WorkoutEntity workouts) {
         this.name = name;
         this.description = description;
         this.users = users;
-        this.workouts = workouts;
-    }
-
-    public void setWorkouts(WorkoutEntity workouts) {
         this.workouts = workouts;
     }
 

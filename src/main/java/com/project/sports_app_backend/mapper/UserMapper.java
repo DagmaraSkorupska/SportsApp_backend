@@ -1,8 +1,6 @@
 package com.project.sports_app_backend.mapper;
 
 
-import com.project.sports_app_backend.controller.ReservationNotFoundException;
-import com.project.sports_app_backend.controller.SportNotFoundException;
 import com.project.sports_app_backend.domain.UserDto;
 import com.project.sports_app_backend.domain.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +41,7 @@ public class UserMapper {
                 userEntity.getEmail(),
                 userEntity.getPassword(),
                 userEntity.getDescription(),
-                userEntity.getPhone(),
-                sportMapper.mapToSportDtoList(userEntity.getSports()),
-                reservationMapper.mapToReservationDtoList(userEntity.getReservation())
+                userEntity.getPhone()
         );
     }
 
@@ -59,27 +55,23 @@ public class UserMapper {
                         user.getEmail(),
                         user.getPassword(),
                         user.getDescription(),
-                        user.getPhone(),
-                        sportMapper.mapToSportDtoList(user.getSports()),
-                        reservationMapper.mapToReservationDtoList(user.getReservation())
+                        user.getPhone()
                         ))
                 .collect(Collectors.toList());
     }
 
     public List<UserEntity> mapToUserEntityList(List<UserDto> userDtos){
         return userDtos.stream()
-                .map(userDto -> {
-                        return new UserEntity(
-                                userDto.getType(),
-                                userDto.getFirstName(),
-                                userDto.getLastName(),
-                                userDto.getEmail(),
-                                userDto.getPassword(),
-                                userDto.getDescription(),
-                                userDto.getPhone(),
-                                sportMapper.mapToSportEntityList(userDto.getSportId()),
-                                reservationMapper.mapToReservationEntityList(userDto.getReservationDtos()));
-                })
+                .map(userDto -> new UserEntity(
+                        userDto.getType(),
+                        userDto.getFirstName(),
+                        userDto.getLastName(),
+                        userDto.getEmail(),
+                        userDto.getPassword(),
+                        userDto.getDescription(),
+                        userDto.getPhone(),
+                        sportMapper.mapToSportEntityList(userDto.getSportId()),
+                        reservationMapper.mapToReservationEntityList(userDto.getReservationDtos())))
                 .collect(Collectors.toList());
     }
 }

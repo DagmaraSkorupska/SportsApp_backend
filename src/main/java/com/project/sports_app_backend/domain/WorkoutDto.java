@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,8 +17,7 @@ public class WorkoutDto {
     private String description;
     private int durationMin;
     private double price1h;
-    private Date date;
     private String address;
-    private List<SportDto> sport;
-    private ReservationDto reservationId;
+    private final List<SportDto> sport = new ArrayList<>();
+    private ReservationDto reservationId ;
 }

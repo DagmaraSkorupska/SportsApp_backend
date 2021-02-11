@@ -11,9 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class ReservationDto {
     private Long id;
-    private WorkoutDto workoutId;
-    private UserDto userId;
     private double toPay;
     private Date date;
-
+    private UserDto userId;
 }

@@ -22,7 +22,7 @@ public class WorkoutEntityTest {
     public void saveNewWorkoutTest(){
         //Given
         List<SportEntity> sportEntityList = new ArrayList<>();
-        WorkoutEntity workout1 = new WorkoutEntity("Swim","desc" ,60, 100,  new Date(2020,02,20), "address1", sportEntityList, null);
+        WorkoutEntity workout1 = new WorkoutEntity("Swim","desc" ,60, 100, "address1", sportEntityList);
         workoutRepository.save(workout1);
 
         //When
@@ -41,7 +41,7 @@ public class WorkoutEntityTest {
     public void deleteWorkoutTest(){
         //Given
         List<SportEntity> sportDtos = new ArrayList<>();
-        WorkoutEntity workout1 = new WorkoutEntity("Swim","desc" ,60, 100,  new Date(2020,02,20),"address1", sportDtos, null);
+        WorkoutEntity workout1 = new WorkoutEntity("Swim","desc" ,60, 100, "address1", sportDtos);
         workoutRepository.save(workout1);
 
         //When

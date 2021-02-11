@@ -17,11 +17,10 @@ public class ReservationMapper {
     @Autowired
     private UserMapper userMapper;
 
-    public ReservationEntity mapToReservationEntity( ReservationDto reservationDto)  {
+    public ReservationEntity mapToReservationEntity( ReservationDto reservationDto )  {
         return new ReservationEntity(
                 reservationDto.getToPay(),
                 reservationDto.getDate(),
-                workoutMapper.mapToWorkoutEntity(reservationDto.getWorkoutId()),
                 userMapper.mapToUserEntity(reservationDto.getUserId())
         );
     }
@@ -29,10 +28,9 @@ public class ReservationMapper {
     public ReservationDto mapToReservationDto( ReservationEntity reservationEntity){
         return new ReservationDto(
                 reservationEntity.getId(),
-                new WorkoutDto(),
-                userMapper.mapToUserDto(reservationEntity.getUserEntity()),
                 reservationEntity.getToPay(),
-                reservationEntity.getDate()
+                reservationEntity.getDate(),
+                userMapper.mapToUserDto(reservationEntity.getUserEntity())
         );
     }
 
@@ -40,10 +38,9 @@ public class ReservationMapper {
         return reservationEntity.stream()
                 .map(reservation -> new ReservationDto(
                         reservation.getId(),
-                        new WorkoutDto(),
-                        userMapper.mapToUserDto(reservation.getUserEntity()),
                         reservation.getToPay(),
-                        reservation.getDate()
+                        reservation.getDate(),
+                        userMapper.mapToUserDto(reservation.getUserEntity())
                 ))
                 .collect(Collectors.toList());
     }
@@ -53,7 +50,6 @@ public class ReservationMapper {
                 .map(reservationDto -> new ReservationEntity(
                                 reservationDto.getToPay(),
                                 reservationDto.getDate(),
-                                workoutMapper.mapToWorkoutEntity(reservationDto.getWorkoutId()),
                                 userMapper.mapToUserEntity(reservationDto.getUserId())
                     ))
                 .collect(Collectors.toList());
