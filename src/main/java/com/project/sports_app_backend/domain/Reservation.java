@@ -1,5 +1,6 @@
 package com.project.sports_app_backend.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 
@@ -10,6 +11,7 @@ import java.util.Date;
 @Entity
 @Table(name = "RESERVATIONS")
 @NoArgsConstructor
+@AllArgsConstructor
 
 public class Reservation {
 
@@ -47,14 +49,6 @@ public class Reservation {
     }
 
     public void setWorkoutEntity(WorkoutEntity workoutEntity) {
-        this.workoutEntity = workoutEntity;
-    }
-
-
-    public Reservation(double toPay, Date date, UserEntity userEntity, WorkoutEntity workoutEntity) {
-        this.toPay = toPay;
-        this.date = new Date();
-        this.userEntity = userEntity;
         this.workoutEntity = workoutEntity;
     }
 

@@ -1,5 +1,6 @@
 package com.project.sports_app_backend.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "WORKOUT")
 @NoArgsConstructor
+@AllArgsConstructor
 public class WorkoutEntity {
 
     @Id
@@ -57,14 +59,6 @@ public class WorkoutEntity {
 //        this.reservationEntity = reservationEntity;
 //    }
 
-    public WorkoutEntity(String name, String description, int durationMin, double price1h, String address, List<SportEntity> sport) {
-        this.name = name;
-        this.description = description;
-        this.durationMin = durationMin;
-        this.price1h = price1h;
-        this.address = address;
-        this.sport = sport;
-    }
 
     public Long getId() {
         return id;

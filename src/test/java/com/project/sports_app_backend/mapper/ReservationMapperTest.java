@@ -8,13 +8,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 
 @SpringBootTest
 public class ReservationMapperTest {
 
     @Autowired
     private ReservationMapper reservationMapper;
+
 
     @Test
     public void testMapToReservationEntity(){
@@ -30,7 +34,8 @@ public class ReservationMapperTest {
     @Test
     public void testMapToReservationDto(){
         //given
-        Reservation reservationEntity = new Reservation(10, new Date(), new UserEntity(), new WorkoutEntity());
+        Reservation reservationEntity = new Reservation(40L,10, new Date(), new UserEntity(), new WorkoutEntity());
+
         //when
         ReservationDto reservationDto = reservationMapper.mapToReservationDto(reservationEntity);
         double toPay = reservationDto.getToPay();
@@ -42,7 +47,7 @@ public class ReservationMapperTest {
     public void testMapToReservationDtoList(){
         //given
         List<Reservation> reservationEntities = new ArrayList<>();
-        reservationEntities.add(new Reservation(10,new Date(), new UserEntity(), new WorkoutEntity()));
+        reservationEntities.add(new Reservation(50L,10,new Date(), new UserEntity(), new WorkoutEntity()));
         //when
         List<ReservationDto> reservationDtos = reservationMapper.mapToReservationDtoList(reservationEntities);
         int size = reservationDtos.size();

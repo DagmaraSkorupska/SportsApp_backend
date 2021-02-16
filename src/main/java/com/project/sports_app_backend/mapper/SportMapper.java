@@ -20,6 +20,7 @@ public class SportMapper {
 
     public SportEntity mapToSportEntity( SportDto sportDto) {
         return new SportEntity(
+                sportDto.getId(),
                 sportDto.getName(),
                 sportDto.getDescription(),
                 userMapper.mapToUserEntityList(sportDto.getUsers()),
@@ -32,6 +33,7 @@ public class SportMapper {
                 sportEntity.getId(),
                 sportEntity.getName(),
                 sportEntity.getDescription(),
+                userMapper.mapToUserDtoList(sportEntity.getUsers()),
                 workoutMapper.mapToWorkoutDto(sportEntity.getWorkouts())
         );
     }
@@ -42,6 +44,7 @@ public class SportMapper {
                         sport.getId(),
                         sport.getName(),
                         sport.getDescription(),
+                        userMapper.mapToUserDtoList(sport.getUsers()),
                         workoutMapper.mapToWorkoutDto(sport.getWorkouts()))
                 )
                 .collect(Collectors.toList());
@@ -50,6 +53,7 @@ public class SportMapper {
     public List<SportEntity> mapToSportEntityList(List<SportDto> sportDtos) {
         return sportDtos.stream()
                 .map(sport -> new SportEntity(
+                        sport.getId(),
                         sport.getName(),
                         sport.getDescription(),
                         userMapper.mapToUserEntityList(sport.getUsers()),

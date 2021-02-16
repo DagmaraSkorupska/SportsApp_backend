@@ -1,7 +1,5 @@
 package com.project.sports_app_backend.mapper;
 
-import com.project.sports_app_backend.controller.ReservationNotFoundException;
-import com.project.sports_app_backend.controller.SportNotFoundException;
 import com.project.sports_app_backend.domain.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,7 @@ public class SportMapperTest {
     public void testMapToSportEntity() {
         //given
         List<UserDto> userDtos = new ArrayList<>();
-        SportDto sportDto = new SportDto(1L, "name", "description", new WorkoutDto());
+        SportDto sportDto = new SportDto(1L, "name", "description",userDtos, new WorkoutDto());
         //when
         SportEntity sportEntity = sportMapper.mapToSportEntity(sportDto);
         String name = sportEntity.getName();
@@ -35,7 +33,7 @@ public class SportMapperTest {
     public void testMapToSportDto(){
         //given
         List<UserEntity> userDtos = new ArrayList<>();
-        SportEntity sportEntity = new SportEntity( "name", "description", userDtos, new WorkoutEntity());
+        SportEntity sportEntity = new SportEntity( 1L,"name", "description", userDtos, new WorkoutEntity());
         //when
         SportDto sportDto = sportMapper.mapToSportDto(sportEntity);
         String name = sportDto.getName();
@@ -48,7 +46,7 @@ public class SportMapperTest {
         //given
         List<UserEntity> userDtos = new ArrayList<>();
         List<SportEntity> sportEntities = new ArrayList<>();
-        sportEntities.add(new SportEntity( "name", "description", userDtos, new WorkoutEntity()));
+        sportEntities.add(new SportEntity( 1L,"name", "description", userDtos, new WorkoutEntity()));
         //when
         List<SportDto> sportDtos = sportMapper.mapToSportDtoList(sportEntities);
         int size = sportDtos.size();
@@ -61,7 +59,7 @@ public class SportMapperTest {
         //given
         List<UserDto> userDtos = new ArrayList<>();
         List<SportDto> sportDtos = new ArrayList<>();
-        sportDtos.add(new SportDto(1L, "name", "description",  new WorkoutDto()));
+        sportDtos.add(new SportDto(1L, "name", "description",userDtos,  new WorkoutDto()));
         //when
         List<SportEntity> sportEntities = sportMapper.mapToSportEntityList(sportDtos);
         int size = sportEntities.size();

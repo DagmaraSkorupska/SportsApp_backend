@@ -1,5 +1,6 @@
 package com.project.sports_app_backend.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.util.List;
 @Entity
 @Table(name = "USERS")
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity {
 
     @Id
@@ -57,18 +59,6 @@ public class UserEntity {
             fetch = FetchType.LAZY)
     public List<Reservation> getReservation() {
         return reservation;
-    }
-
-    public UserEntity(UserType type, String firstName, String lastName, String email, String password, String description, String phone, List<SportEntity> sports, List<Reservation> reservation) {
-        this.type = type;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.description = description;
-        this.phone = phone;
-        this.sports = sports;
-        this.reservation = reservation;
     }
 
     public Long getId() {

@@ -18,6 +18,7 @@ public class ReservationMapper {
 
     public Reservation mapToReservationEntity(ReservationDto reservationDto )  {
         return new Reservation(
+                reservationDto.getId(),
                 reservationDto.getToPay(),
                 reservationDto.getDate(),
                 userMapper.mapToUserEntity(reservationDto.getUserId()),
@@ -50,6 +51,7 @@ public class ReservationMapper {
     public List<Reservation> mapToReservationEntityList(List<ReservationDto> reservationDtos){
         return reservationDtos.stream()
                 .map(reservationDto -> new Reservation(
+                        reservationDto.getId(),
                                 reservationDto.getToPay(),
                                 reservationDto.getDate(),
                                 userMapper.mapToUserEntity(reservationDto.getUserId()),

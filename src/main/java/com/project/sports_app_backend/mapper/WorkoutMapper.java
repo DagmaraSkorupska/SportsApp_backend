@@ -18,6 +18,7 @@ public class WorkoutMapper {
 
     public WorkoutEntity mapToWorkoutEntity( WorkoutDto workoutDto)  {
         return new WorkoutEntity(
+                workoutDto.getId(),
                 workoutDto.getName(),
                 workoutDto.getDescription(),
                 workoutDto.getDurationMin(),
