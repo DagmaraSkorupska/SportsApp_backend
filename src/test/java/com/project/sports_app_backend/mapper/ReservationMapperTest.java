@@ -21,7 +21,7 @@ public class ReservationMapperTest {
         //given
         ReservationDto reservationDto = new ReservationDto(1L,  25, new Date(), new UserDto(), new WorkoutDto());
         //when
-        ReservationEntity reservationEntity = reservationMapper.mapToReservationEntity(reservationDto);
+        Reservation reservationEntity = reservationMapper.mapToReservationEntity(reservationDto);
         double toPay = reservationEntity.getToPay();
         //then
         assertEquals(25, toPay);
@@ -30,7 +30,7 @@ public class ReservationMapperTest {
     @Test
     public void testMapToReservationDto(){
         //given
-        ReservationEntity reservationEntity = new ReservationEntity(10, new Date(), new UserEntity(), new WorkoutEntity());
+        Reservation reservationEntity = new Reservation(10, new Date(), new UserEntity(), new WorkoutEntity());
         //when
         ReservationDto reservationDto = reservationMapper.mapToReservationDto(reservationEntity);
         double toPay = reservationDto.getToPay();
@@ -41,8 +41,8 @@ public class ReservationMapperTest {
     @Test
     public void testMapToReservationDtoList(){
         //given
-        List<ReservationEntity> reservationEntities = new ArrayList<>();
-        reservationEntities.add(new ReservationEntity(10,new Date(), new UserEntity(), new WorkoutEntity()));
+        List<Reservation> reservationEntities = new ArrayList<>();
+        reservationEntities.add(new Reservation(10,new Date(), new UserEntity(), new WorkoutEntity()));
         //when
         List<ReservationDto> reservationDtos = reservationMapper.mapToReservationDtoList(reservationEntities);
         int size = reservationDtos.size();

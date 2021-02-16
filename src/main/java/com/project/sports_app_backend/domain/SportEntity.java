@@ -13,7 +13,7 @@ public class SportEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "SPORT_ID", nullable = false)
+    @Column(name = "SPORT_ID",unique = true, nullable = false)
     private Long id;
 
     @Column(name="SPORT_TYPE", nullable = false)

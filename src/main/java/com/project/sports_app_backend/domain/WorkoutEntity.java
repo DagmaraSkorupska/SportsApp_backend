@@ -13,7 +13,7 @@ public class WorkoutEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID",unique = true, nullable = false)
     private Long id;
 
     @Column(name = "NAME_WORKOUT", nullable = false)

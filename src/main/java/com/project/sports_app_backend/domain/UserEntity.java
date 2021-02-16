@@ -13,7 +13,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "USER_ID", nullable = false)
+    @Column(name = "USER_ID",unique = true, nullable = false)
     private Long id;
 
     @Enumerated(EnumType.STRING)
@@ -25,7 +25,7 @@ public class UserEntity {
     @Column(name = "LASTNAME", nullable = false)
     private String lastName;
 
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "EMAIL", unique = true, nullable = false)
     private String email;
 
     @Column(name = "PASSWORD", nullable = false)
@@ -48,18 +48,18 @@ public class UserEntity {
         return sports;
     }
 
-    private List<ReservationEntity> reservation = new ArrayList<>();
+    private List<Reservation> reservation = new ArrayList<>();
     @Access(AccessType.PROPERTY)
     @OneToMany(
-            targetEntity = ReservationEntity.class,
+            targetEntity = Reservation.class,
             mappedBy = "userEntity",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    public List<ReservationEntity> getReservation() {
+    public List<Reservation> getReservation() {
         return reservation;
     }
 
-    public UserEntity(UserType type, String firstName, String lastName, String email, String password, String description, String phone, List<SportEntity> sports, List<ReservationEntity> reservation) {
+    public UserEntity(UserType type, String firstName, String lastName, String email, String password, String description, String phone, List<SportEntity> sports, List<Reservation> reservation) {
         this.type = type;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -141,7 +141,7 @@ public class UserEntity {
         this.sports = sports;
     }
 
-    public void setReservation(List<ReservationEntity> reservation) {
+    public void setReservation(List<Reservation> reservation) {
         this.reservation = reservation;
     }
 }

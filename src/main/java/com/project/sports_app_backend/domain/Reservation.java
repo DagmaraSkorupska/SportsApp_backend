@@ -11,11 +11,11 @@ import java.util.Date;
 @Table(name = "RESERVATIONS")
 @NoArgsConstructor
 
-public class ReservationEntity {
+public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID", nullable = false)
+    @Column(name = "ID",unique = true, nullable = false)
     private long id;
 
     @Column(name = "TO_PAY", nullable = false)
@@ -51,7 +51,7 @@ public class ReservationEntity {
     }
 
 
-    public ReservationEntity(double toPay, Date date, UserEntity userEntity, WorkoutEntity workoutEntity) {
+    public Reservation(double toPay, Date date, UserEntity userEntity, WorkoutEntity workoutEntity) {
         this.toPay = toPay;
         this.date = new Date();
         this.userEntity = userEntity;

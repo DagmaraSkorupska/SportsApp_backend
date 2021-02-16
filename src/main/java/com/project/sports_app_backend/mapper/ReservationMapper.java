@@ -1,8 +1,7 @@
 package com.project.sports_app_backend.mapper;
 
 import com.project.sports_app_backend.domain.ReservationDto;
-import com.project.sports_app_backend.domain.ReservationEntity;
-import com.project.sports_app_backend.domain.WorkoutDto;
+import com.project.sports_app_backend.domain.Reservation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +16,8 @@ public class ReservationMapper {
     @Autowired
     private UserMapper userMapper;
 
-    public ReservationEntity mapToReservationEntity( ReservationDto reservationDto )  {
-        return new ReservationEntity(
+    public Reservation mapToReservationEntity(ReservationDto reservationDto )  {
+        return new Reservation(
                 reservationDto.getToPay(),
                 reservationDto.getDate(),
                 userMapper.mapToUserEntity(reservationDto.getUserId()),
@@ -26,7 +25,7 @@ public class ReservationMapper {
         );
     }
 
-    public ReservationDto mapToReservationDto( ReservationEntity reservationEntity){
+    public ReservationDto mapToReservationDto( Reservation reservationEntity){
         return new ReservationDto(
                 reservationEntity.getId(),
                 reservationEntity.getToPay(),
@@ -36,7 +35,7 @@ public class ReservationMapper {
         );
     }
 
-    public List<ReservationDto> mapToReservationDtoList(List<ReservationEntity> reservationEntity){
+    public List<ReservationDto> mapToReservationDtoList(List<Reservation> reservationEntity){
         return reservationEntity.stream()
                 .map(reservation -> new ReservationDto(
                         reservation.getId(),
@@ -48,9 +47,9 @@ public class ReservationMapper {
                 .collect(Collectors.toList());
     }
 
-    public List<ReservationEntity> mapToReservationEntityList(List<ReservationDto> reservationDtos){
+    public List<Reservation> mapToReservationEntityList(List<ReservationDto> reservationDtos){
         return reservationDtos.stream()
-                .map(reservationDto -> new ReservationEntity(
+                .map(reservationDto -> new Reservation(
                                 reservationDto.getToPay(),
                                 reservationDto.getDate(),
                                 userMapper.mapToUserEntity(reservationDto.getUserId()),

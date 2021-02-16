@@ -22,7 +22,7 @@ public class ReservationEntityTest {
     @Test
     public void testSaveReservation() {
         //Given
-        ReservationEntity reservationEntity1 = new ReservationEntity(120, Date.from(Instant.now()), null, null);
+        Reservation reservationEntity1 = new Reservation(120, Date.from(Instant.now()), null, null);
         reservationRepository.save(reservationEntity1);
 
         //When
@@ -38,7 +38,7 @@ public class ReservationEntityTest {
     @Test
     public void testDeleteReservation(){
         //Given
-        ReservationEntity reservationEntity1 = new ReservationEntity(120, Date.from(Instant.now()), null, null);
+        Reservation reservationEntity1 = new Reservation(120, Date.from(Instant.now()), null, null);
         reservationRepository.save(reservationEntity1);
 
         //When

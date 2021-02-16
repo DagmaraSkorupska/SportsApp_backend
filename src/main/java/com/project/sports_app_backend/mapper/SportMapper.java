@@ -1,13 +1,11 @@
 package com.project.sports_app_backend.mapper;
 
-import com.project.sports_app_backend.controller.ReservationNotFoundException;
-import com.project.sports_app_backend.controller.SportNotFoundException;
 import com.project.sports_app_backend.domain.SportDto;
 import com.project.sports_app_backend.domain.SportEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
