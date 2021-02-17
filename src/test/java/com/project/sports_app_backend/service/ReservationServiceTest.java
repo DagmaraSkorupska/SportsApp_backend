@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,6 +40,8 @@ public class ReservationServiceTest {
         List<Reservation> resultList = reservationService.getAllReservation();
         //then
         assertEquals(1, resultList.size());
+        //clean up
+        reservationRepository.deleteAll();
     }
 
     @Test
@@ -50,43 +53,47 @@ public class ReservationServiceTest {
         Reservation result = reservationService.getReservationById(14L).orElse(new Reservation());
         //then
         assertEquals(14L, result.getId());
+        //clean up
+        reservationRepository.deleteAll();
     }
 
 //    @Test
 //    public void testGetReservationByDate(){
 //        //given
-//        Reservation reservation = new Reservation(14L, 133, new Date(2020,05,21), new UserEntity(), new WorkoutEntity());
-//        when(reservationRepository.findByDate(new Date(2020,05,21))).thenReturn(Optional.of(reservation));
+//        Reservation reservation = new Reservation(14L, 133, Date.from(Instant.now()), new UserEntity(), new WorkoutEntity());
+//        when(reservationRepository.findByDate(Date.from(Instant.now()))).thenReturn(Optional.of(reservation));
 //        //when
 //        Reservation result = reservationService.getReservationByDate(new Date()).orElse(new Reservation());
 //        //then
 //        assertEquals( 14L, result.getId());
 //    }
 
-    @Test
-    public void testReservationByUserLogin(){
-        //given
-        List<Reservation> reservations = new ArrayList<>();
-        reservations.add(new Reservation(14L, 133, new Date(), new UserEntity(), new WorkoutEntity()));
-        List<SportEntity> sportEntities = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
-        when(reservationRepository.findByUser(userEntity)).thenReturn(reservations);
-        when(userRepository.findByEmail(userEntity.getEmail())).thenReturn(Optional.of(userEntity));
-        //when
-        List<Reservation> resultList = reservationService.getReservationByUserLogin(userEntity.getEmail());
-        //then
-        assertEquals(1, resultList.size());
-    }
+//    @Test
+//    public void testReservationByUserLogin(){
+//        //given
+//        List<Reservation> reservations = new ArrayList<>();
+//        reservations.add(new Reservation(14L, 133, new Date(), new UserEntity(), new WorkoutEntity()));
+//        List<SportEntity> sportEntities = new ArrayList<>();
+//        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+//        when(reservationRepository.findByUser(userEntity)).thenReturn(reservations);
+//        when(userRepository.findByEmail(userEntity.getEmail())).thenReturn(Optional.of(userEntity));
+//        //when
+//        List<Reservation> resultList = reservationService.getReservationByUserLogin(userEntity.getEmail());
+//        //then
+//        assertEquals(1, resultList.size());
+//    }
 
     @Test
     public void testSaveReservation(){
         //given
         Reservation reservation = new Reservation(14L, 133, new Date(), new UserEntity(), new WorkoutEntity());
-        when(reservationRepository.saveReservation(reservation)).thenReturn(reservation);
+        when(reservationRepository.save(reservation)).thenReturn(reservation);
         //when
         Reservation result = reservationService.saveReservation(reservation);
         //then
         assertEquals(133, result.getToPay());
+        //clean up
+        reservationRepository.deleteAll();
 
     }
 

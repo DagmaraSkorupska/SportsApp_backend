@@ -2,6 +2,7 @@ package com.project.sports_app_backend.domain;
 
 import com.project.sports_app_backend.repository.SportRepository;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,8 +15,13 @@ public class SportEntityTest {
     @Autowired
     private SportRepository sportRepository;
 
+    @BeforeEach
+    public void cleanUp(){
+        sportRepository.deleteAll();
+    }
+
     @Test
-    public void saveNewSport(){
+    public void testSaveNewSport(){
         //Given
         SportEntity sport1 = new SportEntity(1L,"Swim", "desc",null, null);
         sportRepository.save(sport1);
@@ -33,9 +39,9 @@ public class SportEntityTest {
     }
 
     @Test
-    public void deleteSport(){
+    public void testDeleteSport(){
         //Given
-        SportEntity sport1 = new SportEntity(1L, "Swim", "desc", null, null);
+        SportEntity sport1 = new SportEntity(1L, "Swim2", "desc2", null, null);
         sportRepository.save(sport1);
 
         //When

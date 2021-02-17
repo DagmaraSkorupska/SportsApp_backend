@@ -9,35 +9,41 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("v1/sports")
 public class SportsController {
-//    @Autowired
-//    private SportService sportService;
-//
-//    @Autowired
-//    private SportMapper sportMapper;
-//
-//    @RequestMapping(method = RequestMethod.GET, value = "getAllSports")
-//    public List<SportDto> getAllSports(){
-//        return sportMapper.costam(sportService.getAllSports());
-//    }
-//
-//    @RequestMapping(method = RequestMethod.POST, value = "createSport", consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public void createSport(@RequestBody SportDto sportDto){
-//       sportService.saveSport(mapper+sportDto);
-//    }
-//
-//    @RequestMapping(method = RequestMethod.GET, value = "getSport")
-//    public SportDto getSport(@RequestParam Long sportId){
-//        return sportMapper.mapcostam(sportService.getSport(sportId));
-//    }
+    @Autowired
+    private SportService sportService;
 
-//    @RequestMapping(method = RequestMethod.PUT, value = "updateSport")
-//    public SportDto updateSport(@RequestBody SportDto sportDto){
-//        return sportMapper/mapcostam(sportService.)
-//    }
+    @Autowired
+    private SportMapper sportMapper;
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sports")
+    public List<SportDto> getAllSports(){
+        return sportMapper.mapToSportDtoList(sportService.getAllSports());
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/sports/id={sportId}")
+    public SportDto getSport(@RequestParam Long sportId) throws SportNotFoundException{
+        return sportMapper.mapToSportDto(sportService.getSport(sportId).orElseThrow(SportNotFoundException::new));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/sports", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void createSport(@RequestBody SportDto sportDto){
+       sportService.saveSport(sportMapper.mapToSportEntity(sportDto));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/sports")
+    public SportDto updateSport(@RequestBody SportDto sportDto){
+        return sportMapper.mapToSportDto(sportService.saveSport(sportMapper.mapToSportEntity(sportDto)));
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "/sports/{sportId}")
+    public void deleteSport(@PathVariable Long sportId){
+        sportService.deleteSport(sportId);
+    }
+
 
 
 }

@@ -1,6 +1,7 @@
 package com.project.sports_app_backend.domain;
 
 import com.project.sports_app_backend.repository.WorkoutRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +17,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class WorkoutEntityTest {
     @Autowired
     private WorkoutRepository workoutRepository;
+
+    @BeforeEach
+    public void cleanUp(){
+        workoutRepository.deleteAll();
+    }
 
     @Test
     public void saveNewWorkoutTest(){
@@ -40,7 +46,7 @@ public class WorkoutEntityTest {
     public void deleteWorkoutTest(){
         //Given
         List<SportEntity> sportDtos = new ArrayList<>();
-        WorkoutEntity workout1 = new WorkoutEntity(20L,"Swim","desc" ,60, 100, "address1", sportDtos);
+        WorkoutEntity workout1 = new WorkoutEntity(20L,"Swim2","desc2" ,60, 100, "address1", sportDtos);
         workoutRepository.save(workout1);
 
         //When

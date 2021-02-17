@@ -10,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +38,8 @@ public class SportServiceTest {
         List<SportEntity> resultList = sportService.getAllSports();
         //then
         assertEquals(2, resultList.size());
+        //clean up
+        sportRepository.deleteAll();
     }
 
     @Test
@@ -51,6 +52,7 @@ public class SportServiceTest {
         SportEntity result = sportService.getSport(1234L).orElse(new SportEntity());
         //then
         assertEquals(1234L, result.getId());
+        sportRepository.deleteAll();
     }
 
     @Test
@@ -58,11 +60,12 @@ public class SportServiceTest {
         //given
         List<UserEntity> userEntities = new ArrayList<>();
         SportEntity sportEntity = (new SportEntity(1234L,"name", "decs", userEntities, new WorkoutEntity()));
-        when(sportRepository.saveSport(sportEntity)).thenReturn(sportEntity);
+        when(sportRepository.save(sportEntity)).thenReturn(sportEntity);
         //when
         SportEntity result = sportService.saveSport(sportEntity);
         //then
         assertEquals("name", result.getName());
         assertEquals("decs", result.getDescription());
+        sportRepository.deleteAll();
     }
 }

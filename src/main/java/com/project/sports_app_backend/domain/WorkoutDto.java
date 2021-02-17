@@ -18,5 +18,5 @@ public class WorkoutDto {
     private int durationMin;
     private double price1h;
     private String address;
-    private final List<SportDto> sport = new ArrayList<>();
+    private  List<SportDto> sport = new ArrayList<>();
 }

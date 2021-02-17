@@ -16,11 +16,14 @@ public interface SportRepository extends CrudRepository<SportEntity, Long> {
    @Override
    Optional<SportEntity> findById(Long id);
 
-
-   <Sport2 extends SportEntity> Sport2 saveSport(Sport2 sport);
+   @Override
+   <Sport2 extends SportEntity> Sport2 save(Sport2 sport);
 
    @Override
    void deleteById(Long id);
+
+   @Override
+   void delete(SportEntity sportEntity);
 
 
 

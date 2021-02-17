@@ -24,7 +24,7 @@ public class WorkoutService {
     }
 
     public WorkoutEntity saveWorkout(WorkoutEntity workoutEntity){
-        return workoutRepository.saveWorkout(workoutEntity);
+        return workoutRepository.save(workoutEntity);
     }
 
     public void deleteById(Long id){

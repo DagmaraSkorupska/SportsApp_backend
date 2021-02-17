@@ -39,6 +39,8 @@ public class UserServiceTest {
         //then
         assertEquals(1, resultList.size());
         assertEquals("firstname", resultList.get(0).getFirstName());
+        //cleanUp
+        userRepository.deleteAll();
     }
 
     @Test
@@ -52,46 +54,54 @@ public class UserServiceTest {
         UserEntity result = userService.getUserById(12L).orElse(new UserEntity());
         //then
         assertEquals(12L, result.getId());
+        //cleanUp
+        userRepository.deleteAll();
     }
 
-    @Test
-    public void testGetUserByFirstName(){
-        //given
-        List<SportEntity> sportEntities = new ArrayList<>();
-        List<Reservation> reservations = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
-        when(userRepository.findByFirstName("firstname")).thenReturn(Optional.of(userEntity));
-        //when
-        UserEntity result = userService.getUserByFirstName("firstname").orElse(new UserEntity());
-        //then
-        assertEquals("firstname", result.getFirstName());
-    }
-
-    @Test
-    public void testGetUserByLastName(){
-        //given
-        List<SportEntity> sportEntities = new ArrayList<>();
-        List<Reservation> reservations = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
-        when(userRepository.findByLastName("lastname")).thenReturn(Optional.of(userEntity));
-        //when
-        UserEntity result = userService.getUserByLastName("lastname").orElse(new UserEntity());
-        //then
-        assertEquals("lastname", result.getLastName());
-    }
-
-    @Test
-    public void testGetUserByEmail(){
-        //given
-        List<SportEntity> sportEntities = new ArrayList<>();
-        List<Reservation> reservations = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
-        when(userRepository.findByEmail("email@test.com")).thenReturn(Optional.of(userEntity));
-        //when
-        UserEntity result = userService.getUserByEmail("email@test.com").orElse(new UserEntity());
-        //then
-        assertEquals("email@test.com", result.getEmail());
-    }
+//    @Test
+//    public void testGetUserByFirstName(){
+//        //given
+//        List<SportEntity> sportEntities = new ArrayList<>();
+//        List<Reservation> reservations = new ArrayList<>();
+//        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+//        when(userRepository.findByFirstName("firstname")).thenReturn(Optional.of(userEntity));
+//        //when
+//        UserEntity result = userService.getUserByFirstName("firstname").orElse(new UserEntity());
+//        //then
+//        assertEquals("firstname", result.getFirstName());
+    //cleanUp
+//        userRepository.deleteAll();
+//    }
+//
+//    @Test
+//    public void testGetUserByLastName(){
+//        //given
+//        List<SportEntity> sportEntities = new ArrayList<>();
+//        List<Reservation> reservations = new ArrayList<>();
+//        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+//        when(userRepository.findByLastName("lastname")).thenReturn(Optional.of(userEntity));
+//        //when
+//        UserEntity result = userService.getUserByLastName("lastname").orElse(new UserEntity());
+//        //then
+//        assertEquals("lastname", result.getLastName());
+    //cleanUp
+//        userRepository.deleteAll();
+//    }
+//
+//    @Test
+//    public void testGetUserByEmail(){
+//        //given
+//        List<SportEntity> sportEntities = new ArrayList<>();
+//        List<Reservation> reservations = new ArrayList<>();
+//        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+//        when(userRepository.findByEmail("email@test.com")).thenReturn(Optional.of(userEntity));
+//        //when
+//        UserEntity result = userService.getUserByEmail("email@test.com").orElse(new UserEntity());
+//        //then
+//        assertEquals("email@test.com", result.getEmail());
+    //cleanUp
+//        userRepository.deleteAll();
+//    }
 
     @Test
     public void testSaveUser(){
@@ -99,10 +109,12 @@ public class UserServiceTest {
         List<SportEntity> sportEntities = new ArrayList<>();
         List<Reservation> reservations = new ArrayList<>();
         UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
-        when(userRepository.saveUser(userEntity)).thenReturn(userEntity);
+        when(userRepository.save(userEntity)).thenReturn(userEntity);
         //when
         UserEntity result = userService.saveUser(userEntity);
         //then
         assertEquals("email@test.com", result.getEmail());
+        //cleanUp
+        userRepository.deleteAll();
     }
 }

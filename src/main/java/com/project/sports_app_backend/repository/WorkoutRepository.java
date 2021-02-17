@@ -18,9 +18,12 @@ public interface WorkoutRepository extends CrudRepository<WorkoutEntity, Long> {
     @Override
     Optional<WorkoutEntity> findById(Long id);
 
-
-    <Workout2 extends WorkoutEntity> Workout2 saveWorkout(Workout2 workout);
+    @Override
+    <Workout2 extends WorkoutEntity> Workout2 save(Workout2 workout);
 
     @Override
     void deleteById(Long id);
+
+    @Override
+    void delete(WorkoutEntity workoutEntity);
 }

@@ -2,6 +2,8 @@ package com.project.sports_app_backend.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -50,12 +52,12 @@ public class UserEntity {
         return sports;
     }
 
-    private List<Reservation> reservation = new ArrayList<>();
+    private List<Reservation> reservation = new ArrayList<>() ;
     @Access(AccessType.PROPERTY)
     @OneToMany(
             targetEntity = Reservation.class,
             mappedBy = "userEntity",
-            cascade = CascadeType.ALL,
+//            cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY)
     public List<Reservation> getReservation() {
         return reservation;

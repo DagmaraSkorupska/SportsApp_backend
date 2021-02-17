@@ -27,8 +27,7 @@ public class Reservation {
     @Column(name = "DATE_RESERVATION", nullable = false)
     private Date date;
 
-    private UserEntity userEntity = new UserEntity();
-
+    private UserEntity userEntity;
     @Access(AccessType.PROPERTY)
     @ManyToOne
     @JoinColumn(name = "USER_ID")
@@ -40,9 +39,10 @@ public class Reservation {
         this.userEntity = userId;
     }
 
-    private WorkoutEntity workoutEntity = new WorkoutEntity();
+    private WorkoutEntity workoutEntity;
     @Access(AccessType.PROPERTY)
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    cascade = CascadeType.PERSIST,
+    @OneToOne( fetch = FetchType.LAZY)
     @JoinColumn(name = "WORKOUT_ID")
     public WorkoutEntity getWorkoutEntity() {
         return workoutEntity;

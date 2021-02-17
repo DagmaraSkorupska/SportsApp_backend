@@ -39,6 +39,8 @@ public class WorkoutServiceTest {
         List<WorkoutEntity> resultList = workoutService.getAllWorkout();
         //then
         assertEquals(2, resultList.size());
+        //cleanUp
+        workoutRepository.deleteAll();
     }
 
     @Test
@@ -50,17 +52,21 @@ public class WorkoutServiceTest {
         WorkoutEntity result = workoutService.getWorkoutById(1234L).orElse(new WorkoutEntity());
         //then
         assertEquals(1234L, result.getId());
+        //cleanUp
+        workoutRepository.deleteAll();
     }
 
     @Test
     public void testSaveWorkout(){
         List<SportEntity> sportEntities = new ArrayList<>();
         WorkoutEntity workoutEntity = (new WorkoutEntity(1234L,"name", "decs", 60, 120, "address", sportEntities));
-        when(workoutRepository.saveWorkout(workoutEntity)).thenReturn(workoutEntity);
+        when(workoutRepository.save(workoutEntity)).thenReturn(workoutEntity);
         //when
         WorkoutEntity result = workoutService.saveWorkout(workoutEntity);
         //then
         assertEquals("name", result.getName());
+        //cleanUp
+        workoutRepository.deleteAll();
     }
 
 

@@ -21,20 +21,20 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public Optional<UserEntity> getUserByFirstName(String firstName){
-        return userRepository.findByFirstName(firstName);
-    }
-
-    public Optional<UserEntity> getUserByLastName(String lastName){
-        return userRepository.findByLastName(lastName);
-    }
-
-    public Optional<UserEntity> getUserByEmail(String email){
-        return userRepository.findByEmail(email);
-    }
+//    public Optional<UserEntity> getUserByFirstName(String firstName){
+//        return userRepository.findByFirstName(firstName);
+//    }
+//
+//    public Optional<UserEntity> getUserByLastName(String lastName){
+//        return userRepository.findByLastName(lastName);
+//    }
+//
+//    public Optional<UserEntity> getUserByEmail(String email){
+//        return userRepository.findByEmail(email);
+//    }
 
     public UserEntity saveUser(UserEntity userEntity){
-        return userRepository.saveUser(userEntity);
+        return userRepository.save(userEntity);
     }
 
     public void deleteById(Long id){

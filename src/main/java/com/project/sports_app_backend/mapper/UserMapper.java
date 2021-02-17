@@ -42,7 +42,9 @@ public class UserMapper {
                 userEntity.getEmail(),
                 userEntity.getPassword(),
                 userEntity.getDescription(),
-                userEntity.getPhone()
+                userEntity.getPhone(),
+                sportMapper.mapToSportDtoList(userEntity.getSports()),
+                reservationMapper.mapToReservationDtoList(userEntity.getReservation())
         );
     }
 
@@ -56,7 +58,9 @@ public class UserMapper {
                         user.getEmail(),
                         user.getPassword(),
                         user.getDescription(),
-                        user.getPhone()
+                        user.getPhone(),
+                        sportMapper.mapToSportDtoList(user.getSports()),
+                        reservationMapper.mapToReservationDtoList(user.getReservation())
                         ))
                 .collect(Collectors.toList());
     }

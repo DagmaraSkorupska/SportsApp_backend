@@ -26,12 +26,13 @@ public class SportEntity {
 
     private List<UserEntity> users = new ArrayList<>();
     @Access(AccessType.PROPERTY)
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "sports")
+//    cascade = CascadeType.PERSIST,
+    @ManyToMany( mappedBy = "sports")
     public List<UserEntity> getUsers() {
         return users;
     }
 
-    private WorkoutEntity workouts = new WorkoutEntity();
+    private WorkoutEntity workouts;
     @Access(AccessType.PROPERTY)
     @ManyToOne
     @JoinColumn(name="WORKOUTS_ID")

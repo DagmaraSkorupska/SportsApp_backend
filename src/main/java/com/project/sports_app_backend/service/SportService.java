@@ -22,7 +22,7 @@ public class SportService {
     }
 
     public SportEntity saveSport(SportEntity sportEntity){
-        return sportRepository.saveSport(sportEntity);
+        return sportRepository.save(sportEntity);
     }
 
     public void deleteSport(Long id){

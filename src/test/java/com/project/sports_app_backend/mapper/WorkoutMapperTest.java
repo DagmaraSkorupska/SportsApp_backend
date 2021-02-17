@@ -23,7 +23,7 @@ public class WorkoutMapperTest {
         //given
         List<SportDto> sportDtos = new ArrayList<>();
         WorkoutDto workoutDto = new WorkoutDto(1L, "name", "desc", 60,
-                100, "address");
+                100, "address", sportDtos);
         //when
         WorkoutEntity workoutEntity = workoutMapper.mapToWorkoutEntity(workoutDto);
         String name = workoutEntity.getName();
@@ -47,4 +47,17 @@ public class WorkoutMapperTest {
         assertEquals("desc", desc);
         assertEquals(60, time);
     }
+
+    @Test
+    public void testMapWorkoutDtoList(){
+        List<SportEntity> sportEntities = new ArrayList<>();
+        List<WorkoutEntity> workoutEntities = new ArrayList<>();
+        workoutEntities.add(new WorkoutEntity(5L,"name3", "desc3", 60,
+                100, "address", sportEntities));
+        //when
+        List<WorkoutDto> workoutDto = workoutMapper.mapToWorkoutDtoList(workoutEntities);
+        //then
+        assertEquals(1, workoutDto.size());
+    }
+
 }

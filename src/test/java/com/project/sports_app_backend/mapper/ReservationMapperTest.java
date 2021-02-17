@@ -2,8 +2,10 @@ package com.project.sports_app_backend.mapper;
 
 import com.project.sports_app_backend.domain.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +14,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class ReservationMapperTest {
 
