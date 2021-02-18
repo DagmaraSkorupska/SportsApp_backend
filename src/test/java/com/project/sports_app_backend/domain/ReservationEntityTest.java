@@ -22,10 +22,10 @@ public class ReservationEntityTest {
     @Autowired
     private ReservationRepository reservationRepository;
 
-//    @BeforeEach
-//    public void cleanUp(){
-//        reservationRepository.deleteAll();
-//    }
+    @BeforeEach
+    public void cleanUp(){
+        reservationRepository.deleteAll();
+    }
 
     @Test
     public void testSaveReservation() {
@@ -41,17 +41,17 @@ public class ReservationEntityTest {
     }
 
     @Test
-    public void testDeleteReservation(){
+    public void testDeleteReservation() {
         //Given
-        Reservation reservationEntity1 = new Reservation(798L,120, Date.from(Instant.now()), null, null);
-        reservationRepository.save(reservationEntity1);
+        Reservation reservationEntity1 = new Reservation(798L, 120, Date.from(Instant.now()), null, null);
+        Reservation save = reservationRepository.save(reservationEntity1);
         //When
-        reservationRepository.delete(reservationEntity1);
+        reservationRepository.delete(save);
         long countOfReservation = reservationRepository.count();
         //Then
         assertEquals(0, countOfReservation);
-//        //CleanUp
-//        reservationRepository.deleteAll();
+        //CleanUp
+        reservationRepository.deleteAll();
     }
 
 }

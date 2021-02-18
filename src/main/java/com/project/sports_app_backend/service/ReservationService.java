@@ -29,18 +29,18 @@ public class ReservationService {
         return reservationRepository.findById(id);
     }
 
-//    public Optional<Reservation> getReservationByDate(Date date){
-//        return reservationRepository.findByDate(date);
-//    }
-//
-//    public List<Reservation> getReservationByUserLogin(String login){
-//        UserEntity user = userRepository.findByEmail(login).orElse(new UserEntity());
-//        List<Reservation> reservations = new ArrayList<>();
-//        if(user.getEmail() !=null){
-//            reservations = reservationRepository.findByUser(user);
-//        }
-//        return reservations;
-//    }
+    public Optional<Reservation> getReservationByDate(Date date){
+        return reservationRepository.findByDate(date);
+    }
+
+    public List<Reservation> getReservationByUserLogin(String login){
+        UserEntity user = userRepository.findByEmail(login).orElse(new UserEntity());
+        List<Reservation> reservations = new ArrayList<>();
+        if(user.getEmail() !=null){
+            reservations = reservationRepository.findByUserEntity(user);
+        }
+        return reservations;
+    }
 
     public Reservation saveReservation(Reservation reservation){
         return reservationRepository.save(reservation);

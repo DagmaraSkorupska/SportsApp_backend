@@ -58,50 +58,50 @@ public class UserServiceTest {
         userRepository.deleteAll();
     }
 
-//    @Test
-//    public void testGetUserByFirstName(){
-//        //given
-//        List<SportEntity> sportEntities = new ArrayList<>();
-//        List<Reservation> reservations = new ArrayList<>();
-//        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
-//        when(userRepository.findByFirstName("firstname")).thenReturn(Optional.of(userEntity));
-//        //when
-//        UserEntity result = userService.getUserByFirstName("firstname").orElse(new UserEntity());
-//        //then
-//        assertEquals("firstname", result.getFirstName());
-    //cleanUp
-//        userRepository.deleteAll();
-//    }
-//
-//    @Test
-//    public void testGetUserByLastName(){
-//        //given
-//        List<SportEntity> sportEntities = new ArrayList<>();
-//        List<Reservation> reservations = new ArrayList<>();
-//        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
-//        when(userRepository.findByLastName("lastname")).thenReturn(Optional.of(userEntity));
-//        //when
-//        UserEntity result = userService.getUserByLastName("lastname").orElse(new UserEntity());
-//        //then
-//        assertEquals("lastname", result.getLastName());
-    //cleanUp
-//        userRepository.deleteAll();
-//    }
-//
-//    @Test
-//    public void testGetUserByEmail(){
-//        //given
-//        List<SportEntity> sportEntities = new ArrayList<>();
-//        List<Reservation> reservations = new ArrayList<>();
-//        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
-//        when(userRepository.findByEmail("email@test.com")).thenReturn(Optional.of(userEntity));
-//        //when
-//        UserEntity result = userService.getUserByEmail("email@test.com").orElse(new UserEntity());
-//        //then
-//        assertEquals("email@test.com", result.getEmail());
-    //cleanUp
-//        userRepository.deleteAll();
-//    }
+    @Test
+    public void testGetUserByFirstName(){
+        //given
+        List<SportEntity> sportEntities = new ArrayList<>();
+        List<Reservation> reservations = new ArrayList<>();
+        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+        when(userRepository.findByFirstName("firstname")).thenReturn(Optional.of(userEntity));
+        //when
+        UserEntity result = userService.getUserByFirstName("firstname").orElse(new UserEntity());
+        //then
+        assertEquals("firstname", result.getFirstName());
+        //cleanUp
+        userRepository.deleteAll();
+    }
+
+    @Test
+    public void testGetUserByLastName(){
+        //given
+        List<SportEntity> sportEntities = new ArrayList<>();
+        List<Reservation> reservations = new ArrayList<>();
+        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+        when(userRepository.findByLastName("lastname")).thenReturn(Optional.of(userEntity));
+        //when
+        UserEntity result = userService.getUserByLastName("lastname").orElse(new UserEntity());
+        //then
+        assertEquals("lastname", result.getLastName());
+        //cleanUp
+        userRepository.deleteAll();
+    }
+
+    @Test
+    public void testGetUserByEmail(){
+        //given
+        List<SportEntity> sportEntities = new ArrayList<>();
+        List<Reservation> reservations = new ArrayList<>();
+        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+        when(userRepository.findByEmail("email@test.com")).thenReturn(Optional.of(userEntity));
+        //when
+        UserEntity result = userService.getUserByEmail("email@test.com").orElse(new UserEntity());
+        //then
+        assertEquals("email@test.com", result.getEmail());
+        // cleanUp
+        userRepository.deleteAll();
+    }
 
     @Test
     public void testSaveUser(){

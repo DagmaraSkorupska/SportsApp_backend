@@ -57,31 +57,31 @@ public class ReservationServiceTest {
         reservationRepository.deleteAll();
     }
 
-//    @Test
-//    public void testGetReservationByDate(){
-//        //given
-//        Reservation reservation = new Reservation(14L, 133, Date.from(Instant.now()), new UserEntity(), new WorkoutEntity());
-//        when(reservationRepository.findByDate(Date.from(Instant.now()))).thenReturn(Optional.of(reservation));
-//        //when
-//        Reservation result = reservationService.getReservationByDate(new Date()).orElse(new Reservation());
-//        //then
-//        assertEquals( 14L, result.getId());
-//    }
+    @Test
+    public void testGetReservationByDate(){
+        //given
+        Reservation reservation = new Reservation(14L, 133, Date.from(Instant.now()), new UserEntity(), new WorkoutEntity());
+        when(reservationRepository.findByDate(Date.from(Instant.now()))).thenReturn(Optional.of(reservation));
+        //when
+        Reservation result = reservationService.getReservationByDate(new Date()).orElse(new Reservation());
+        //then
+        assertEquals( 14L, result.getId());
+    }
 
-//    @Test
-//    public void testReservationByUserLogin(){
-//        //given
-//        List<Reservation> reservations = new ArrayList<>();
-//        reservations.add(new Reservation(14L, 133, new Date(), new UserEntity(), new WorkoutEntity()));
-//        List<SportEntity> sportEntities = new ArrayList<>();
-//        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
-//        when(reservationRepository.findByUser(userEntity)).thenReturn(reservations);
-//        when(userRepository.findByEmail(userEntity.getEmail())).thenReturn(Optional.of(userEntity));
-//        //when
-//        List<Reservation> resultList = reservationService.getReservationByUserLogin(userEntity.getEmail());
-//        //then
-//        assertEquals(1, resultList.size());
-//    }
+    @Test
+    public void testReservationByUserLogin(){
+        //given
+        List<Reservation> reservations = new ArrayList<>();
+        reservations.add(new Reservation(14L, 133, new Date(), new UserEntity(), new WorkoutEntity()));
+        List<SportEntity> sportEntities = new ArrayList<>();
+        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+        when(reservationRepository.findByUserEntity(userEntity)).thenReturn(reservations);
+        when(userRepository.findByEmail(userEntity.getEmail())).thenReturn(Optional.of(userEntity));
+        //when
+        List<Reservation> resultList = reservationService.getReservationByUserLogin(userEntity.getEmail());
+        //then
+        assertEquals(1, resultList.size());
+    }
 
     @Test
     public void testSaveReservation(){

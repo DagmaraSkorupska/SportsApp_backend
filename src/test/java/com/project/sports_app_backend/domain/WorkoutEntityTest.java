@@ -47,10 +47,10 @@ public class WorkoutEntityTest {
         //Given
         List<SportEntity> sportDtos = new ArrayList<>();
         WorkoutEntity workout1 = new WorkoutEntity(20L,"Swim2","desc2" ,60, 100, "address1", sportDtos);
-        workoutRepository.save(workout1);
+        WorkoutEntity save = workoutRepository.save(workout1);
 
         //When
-        workoutRepository.delete(workout1);
+        workoutRepository.delete(save);
         long countWorkout = workoutRepository.count();
 
         //Then

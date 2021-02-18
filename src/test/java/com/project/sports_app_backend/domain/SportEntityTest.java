@@ -42,10 +42,10 @@ public class SportEntityTest {
     public void testDeleteSport(){
         //Given
         SportEntity sport1 = new SportEntity(1L, "Swim2", "desc2", null, null);
-        sportRepository.save(sport1);
+        SportEntity save = sportRepository.save(sport1);
 
         //When
-        sportRepository.delete(sport1);
+        sportRepository.delete(save);
         long countSports = sportRepository.count();
 
         //Then

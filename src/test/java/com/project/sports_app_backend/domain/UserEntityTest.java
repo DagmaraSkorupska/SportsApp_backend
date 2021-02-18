@@ -40,10 +40,10 @@ public class UserEntityTest {
     public void deleteUserTest(){
         //Given
         UserEntity user1 = new UserEntity(10L,USER, "user2", "abc2", "test@mail.com", "password1", "desc", "1324679", null,null);
-        userRepository.save(user1);
+        UserEntity save = userRepository.save(user1);
 
         //When
-        userRepository.delete(user1);
+        userRepository.delete(save);
         long countUser = userRepository.count();
 
         //Then

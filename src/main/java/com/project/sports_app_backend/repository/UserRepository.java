@@ -17,13 +17,13 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
     Optional<UserEntity> findById(Long id);
 
 
-//    Optional<UserEntity> findByFirstName(String firstName);
-//
-//
-//    Optional<UserEntity> findByLastName(String lastName);
-//
-//
-//    Optional<UserEntity> findByEmail(String email);
+    Optional<UserEntity> findByFirstName(String firstName);
+
+
+    Optional<UserEntity> findByLastName(String lastName);
+
+
+    Optional<UserEntity> findByEmail(String email);
 
     @Override
     <User2 extends UserEntity> User2 save(User2 user);

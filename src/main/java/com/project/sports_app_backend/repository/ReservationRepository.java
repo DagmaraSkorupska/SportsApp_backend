@@ -22,10 +22,10 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
     Optional<Reservation> findById(Long id);
 
 
-//    Optional<Reservation> findByDate(Date date);
-//
-//
-//    List<Reservation> findByUser(UserEntity user);
+    Optional<Reservation> findByDate(Date date);
+
+
+    List<Reservation> findByUserEntity(UserEntity user);
 
     @Override
     <Reservation2 extends Reservation> Reservation2 save(Reservation2 reservation);
