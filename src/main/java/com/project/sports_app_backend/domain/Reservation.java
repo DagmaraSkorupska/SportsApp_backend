@@ -41,8 +41,7 @@ public class Reservation {
 
     private WorkoutEntity workoutEntity;
     @Access(AccessType.PROPERTY)
-//    cascade = CascadeType.PERSIST,
-    @OneToOne( fetch = FetchType.LAZY)
+    @OneToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "WORKOUT_ID")
     public WorkoutEntity getWorkoutEntity() {
         return workoutEntity;

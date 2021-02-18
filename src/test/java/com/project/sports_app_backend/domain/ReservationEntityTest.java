@@ -7,12 +7,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+@Transactional
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class ReservationEntityTest {
@@ -21,10 +22,10 @@ public class ReservationEntityTest {
     @Autowired
     private ReservationRepository reservationRepository;
 
-    @BeforeEach
-    public void cleanUp(){
-        reservationRepository.deleteAll();
-    }
+//    @BeforeEach
+//    public void cleanUp(){
+//        reservationRepository.deleteAll();
+//    }
 
     @Test
     public void testSaveReservation() {
@@ -49,8 +50,8 @@ public class ReservationEntityTest {
         long countOfReservation = reservationRepository.count();
         //Then
         assertEquals(0, countOfReservation);
-        //CleanUp
-        reservationRepository.deleteAll();
+//        //CleanUp
+//        reservationRepository.deleteAll();
     }
 
 }

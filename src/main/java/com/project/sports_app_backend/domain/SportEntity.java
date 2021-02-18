@@ -26,8 +26,7 @@ public class SportEntity {
 
     private List<UserEntity> users = new ArrayList<>();
     @Access(AccessType.PROPERTY)
-//    cascade = CascadeType.PERSIST,
-    @ManyToMany( mappedBy = "sports")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "sports")
     public List<UserEntity> getUsers() {
         return users;
     }

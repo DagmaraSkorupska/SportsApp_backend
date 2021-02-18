@@ -37,7 +37,7 @@ public class WorkoutEntity {
     @Access(AccessType.PROPERTY)
     @OneToMany(targetEntity = SportEntity.class,
             mappedBy = "workouts",
-//            cascade = CascadeType.PERSIST ,
+            cascade = CascadeType.ALL ,
             fetch = FetchType.LAZY)
     public List<SportEntity> getSport() {
         return sport;

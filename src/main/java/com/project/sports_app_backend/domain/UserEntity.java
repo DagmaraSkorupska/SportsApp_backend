@@ -57,7 +57,7 @@ public class UserEntity {
     @OneToMany(
             targetEntity = Reservation.class,
             mappedBy = "userEntity",
-//            cascade = CascadeType.PERSIST,
+            cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     public List<Reservation> getReservation() {
         return reservation;
