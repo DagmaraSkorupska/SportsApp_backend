@@ -7,6 +7,7 @@ import com.project.sports_app_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +30,7 @@ public class ReservationService {
         return reservationRepository.findById(id);
     }
 
-    public Optional<Reservation> getReservationByDate(Date date){
+    public Optional<Reservation> getReservationByDate(LocalDateTime date){
         return reservationRepository.findByDate(date);
     }
 

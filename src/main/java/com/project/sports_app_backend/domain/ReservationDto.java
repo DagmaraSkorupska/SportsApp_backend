@@ -4,7 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 @Getter
 @AllArgsConstructor
@@ -12,7 +13,7 @@ import java.util.Date;
 public class ReservationDto {
     private Long id;
     private double toPay;
-    private Date date;
+    private LocalDateTime date;
     private UserDto userId;
     private WorkoutDto workoutDto;
 }

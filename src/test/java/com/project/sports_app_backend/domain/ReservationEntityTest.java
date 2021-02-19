@@ -10,6 +10,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -30,7 +31,7 @@ public class ReservationEntityTest {
     @Test
     public void testSaveReservation() {
         //Given
-        Reservation reservationEntity1 = new Reservation(489L,10, Date.from(Instant.now()), null, null);
+        Reservation reservationEntity1 = new Reservation(489L,10, LocalDateTime.now(), null, null);
         reservationRepository.save(reservationEntity1);
         //When
         long countOfReservation = reservationRepository.count();
@@ -43,7 +44,7 @@ public class ReservationEntityTest {
     @Test
     public void testDeleteReservation() {
         //Given
-        Reservation reservationEntity1 = new Reservation(798L, 120, Date.from(Instant.now()), null, null);
+        Reservation reservationEntity1 = new Reservation(798L, 120, LocalDateTime.now(), null, null);
         Reservation save = reservationRepository.save(reservationEntity1);
         //When
         reservationRepository.delete(save);

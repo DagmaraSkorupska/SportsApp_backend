@@ -29,6 +29,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.7.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.1")
+    compile('com.google.code.gson:gson:2.8.2')
 }
 
 test {

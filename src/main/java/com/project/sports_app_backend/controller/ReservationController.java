@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("v1/reservation")
+@RequestMapping("/v1")
 public class ReservationController {
     @Autowired
     private ReservationService reservationService;
@@ -24,22 +26,32 @@ public class ReservationController {
         return reservationMapper.mapToReservationDtoList(reservationService.getAllReservation());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/reservations/id={reservationId}")
-    public ReservationDto getReservation(@RequestParam Long reservationId) throws ReservationNotFoundException{
+    @RequestMapping(method = RequestMethod.GET, value = "/reservations/id = {reservationId}")
+    public ReservationDto getReservationFromId(@PathVariable Long reservationId) throws ReservationNotFoundException{
         return reservationMapper.mapToReservationDto(reservationService.getReservationById(reservationId).orElseThrow(ReservationNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/reservation", consumes = MediaType.APPLICATION_JSON_VALUE)
+//    @RequestMapping(method = RequestMethod.GET, value = "/reservations/date = {date}")
+//    public ReservationDto getReservationFromDate(@PathVariable LocalDateTime date) throws ReservationNotFoundException{
+//        return reservationMapper.mapToReservationDto(reservationService.getReservationByDate(date).orElseThrow(ReservationNotFoundException::new));
+//    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/reservations/login = {email}")
+    public List<ReservationDto> getReservationFromEmail(@PathVariable String email){
+        return reservationMapper.mapToReservationDtoList(reservationService.getReservationByUserLogin(email));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/reservations", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createReservation(@RequestBody ReservationDto reservationDto){
         reservationService.saveReservation(reservationMapper.mapToReservationEntity(reservationDto));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/reservation")
+    @RequestMapping(method = RequestMethod.PUT, value = "/reservations")
     public ReservationDto updateReservation(@RequestBody ReservationDto reservationDto){
         return reservationMapper.mapToReservationDto(reservationService.saveReservation(reservationMapper.mapToReservationEntity(reservationDto)));
     }
 
-    @RequestMapping(method  =RequestMethod.DELETE, value = "/reservations/{reservationId}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/reservations/{reservationId}")
     public void deleteReservation(@PathVariable Long reservationId){
         reservationService.deleteById(reservationId);
     }

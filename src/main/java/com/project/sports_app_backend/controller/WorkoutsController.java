@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("v1/workouts")
+@RequestMapping("/v1")
 public class WorkoutsController {
 
     @Autowired
@@ -25,22 +25,22 @@ public class WorkoutsController {
         return workoutMapper.mapToWorkoutDtoList(workoutService.getAllWorkout());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/workouts/id={workoutId}")
-    public WorkoutDto getWorkout(@RequestParam Long workoutId) throws WorkoutNotFoundException{
+    @RequestMapping(method = RequestMethod.GET, value = "/workouts/{workoutId}")
+    public WorkoutDto getWorkout(@PathVariable Long workoutId) throws WorkoutNotFoundException{
         return workoutMapper.mapToWorkoutDto(workoutService.getWorkoutById(workoutId).orElseThrow(WorkoutNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/sports", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "/workouts", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createWorkout(@RequestBody WorkoutDto workoutDto){
         workoutService.saveWorkout(workoutMapper.mapToWorkoutEntity(workoutDto));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/workout")
+    @RequestMapping(method = RequestMethod.PUT, value = "/workouts")
     public WorkoutDto updateWorkout(@RequestBody WorkoutDto workoutDto){
         return workoutMapper.mapToWorkoutDto(workoutService.saveWorkout(workoutMapper.mapToWorkoutEntity(workoutDto)));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/workout/{workoutId}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/workouts/{workoutId}")
     public void deleteWorkout(@PathVariable Long workoutId){
         workoutService.deleteById(workoutId);
     }

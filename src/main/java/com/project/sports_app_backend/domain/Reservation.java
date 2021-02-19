@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -25,7 +26,7 @@ public class Reservation {
 
     @GeneratedValue
     @Column(name = "DATE_RESERVATION", nullable = false)
-    private Date date;
+    private LocalDateTime date;
 
     private UserEntity userEntity;
     @Access(AccessType.PROPERTY)
@@ -67,11 +68,11 @@ public class Reservation {
         this.toPay = toPay;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

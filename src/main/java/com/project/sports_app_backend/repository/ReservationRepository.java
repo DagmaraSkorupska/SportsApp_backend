@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +23,7 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
     Optional<Reservation> findById(Long id);
 
 
-    Optional<Reservation> findByDate(Date date);
+    Optional<Reservation> findByDate(LocalDateTime date);
 
 
     List<Reservation> findByUserEntity(UserEntity user);

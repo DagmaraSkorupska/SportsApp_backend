@@ -11,7 +11,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("v1/sports")
+@RequestMapping("/v1")
 public class SportsController {
     @Autowired
     private SportService sportService;
@@ -20,30 +20,27 @@ public class SportsController {
     private SportMapper sportMapper;
 
     @RequestMapping(method = RequestMethod.GET, value = "/sports")
-    public List<SportDto> getAllSports(){
+    public List<SportDto> getAllSports() {
         return sportMapper.mapToSportDtoList(sportService.getAllSports());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sports/id={sportId}")
-    public SportDto getSport(@RequestParam Long sportId) throws SportNotFoundException{
+    @RequestMapping(method = RequestMethod.GET, value = "/sports/{sportId}")
+    public SportDto getSport(@PathVariable Long sportId) throws SportNotFoundException {
         return sportMapper.mapToSportDto(sportService.getSport(sportId).orElseThrow(SportNotFoundException::new));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/sports", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createSport(@RequestBody SportDto sportDto){
-       sportService.saveSport(sportMapper.mapToSportEntity(sportDto));
+    public void createSport(@RequestBody SportDto sportDto) {
+        sportService.saveSport(sportMapper.mapToSportEntity(sportDto));
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/sports")
-    public SportDto updateSport(@RequestBody SportDto sportDto){
+    public SportDto updateSport(@RequestBody SportDto sportDto) {
         return sportMapper.mapToSportDto(sportService.saveSport(sportMapper.mapToSportEntity(sportDto)));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/sports/{sportId}")
-    public void deleteSport(@PathVariable Long sportId){
+    public void deleteSport(@PathVariable Long sportId) {
         sportService.deleteSport(sportId);
     }
-
-
-
 }
