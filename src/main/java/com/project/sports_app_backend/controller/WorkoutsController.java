@@ -1,5 +1,6 @@
 package com.project.sports_app_backend.controller;
 
+import com.project.sports_app_backend.controller.exception.WorkoutNotFoundException;
 import com.project.sports_app_backend.domain.WorkoutDto;
 import com.project.sports_app_backend.mapper.WorkoutMapper;
 import com.project.sports_app_backend.service.WorkoutService;
@@ -26,8 +27,8 @@ public class WorkoutsController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/workouts/{workoutId}")
-    public WorkoutDto getWorkout(@PathVariable Long workoutId) throws WorkoutNotFoundException{
-        return workoutMapper.mapToWorkoutDto(workoutService.getWorkoutById(workoutId).orElseThrow(WorkoutNotFoundException::new));
+    public WorkoutDto getWorkout(@PathVariable Long workoutId) throws WorkoutNotFoundException {
+        return workoutMapper.mapToWorkoutDto(workoutService.getWorkoutById(workoutId).orElseThrow(() -> new WorkoutNotFoundException(workoutId)));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/workouts", consumes = MediaType.APPLICATION_JSON_VALUE)

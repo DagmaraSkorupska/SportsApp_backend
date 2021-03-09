@@ -1,5 +1,6 @@
 package com.project.sports_app_backend.controller;
 
+import com.project.sports_app_backend.controller.exception.SportNotFoundException;
 import com.project.sports_app_backend.domain.SportDto;
 import com.project.sports_app_backend.mapper.SportMapper;
 import com.project.sports_app_backend.service.SportService;
@@ -26,7 +27,7 @@ public class SportsController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/sports/{sportId}")
     public SportDto getSport(@PathVariable Long sportId) throws SportNotFoundException {
-        return sportMapper.mapToSportDto(sportService.getSport(sportId).orElseThrow(SportNotFoundException::new));
+        return sportMapper.mapToSportDto(sportService.getSport(sportId).orElseThrow(() -> new SportNotFoundException(sportId)));
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/sports", consumes = MediaType.APPLICATION_JSON_VALUE)

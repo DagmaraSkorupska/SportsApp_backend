@@ -1,14 +1,11 @@
 package com.project.sports_app_backend.mapper;
 
-import com.project.sports_app_backend.controller.ReservationNotFoundException;
-import com.project.sports_app_backend.controller.SportNotFoundException;
 import com.project.sports_app_backend.domain.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

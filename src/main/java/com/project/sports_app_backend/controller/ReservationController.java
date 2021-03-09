@@ -1,5 +1,6 @@
 package com.project.sports_app_backend.controller;
 
+import com.project.sports_app_backend.controller.exception.ReservationNotFoundException;
 import com.project.sports_app_backend.domain.ReservationDto;
 import com.project.sports_app_backend.mapper.ReservationMapper;
 import com.project.sports_app_backend.service.ReservationService;
@@ -7,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -27,8 +26,8 @@ public class ReservationController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/reservations/id = {reservationId}")
-    public ReservationDto getReservationFromId(@PathVariable Long reservationId) throws ReservationNotFoundException{
-        return reservationMapper.mapToReservationDto(reservationService.getReservationById(reservationId).orElseThrow(ReservationNotFoundException::new));
+    public ReservationDto getReservationFromId(@PathVariable Long reservationId) throws ReservationNotFoundException {
+        return reservationMapper.mapToReservationDto(reservationService.getReservationById(reservationId).orElseThrow(() -> new ReservationNotFoundException(reservationId)));
     }
 
 //    @RequestMapping(method = RequestMethod.GET, value = "/reservations/date = {date}")

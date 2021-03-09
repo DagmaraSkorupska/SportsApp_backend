@@ -19,7 +19,6 @@ public class UserMapper {
 
     public UserEntity mapToUserEntity ( UserDto userDto){
             return new UserEntity(
-                    userDto.getId(),
                     userDto.getType(),
                     userDto.getFirstName(),
                     userDto.getLastName(),
@@ -68,7 +67,6 @@ public class UserMapper {
     public List<UserEntity> mapToUserEntityList(List<UserDto> userDtos){
         return userDtos.stream()
                 .map(userDto -> new UserEntity(
-                        userDto.getId(),
                         userDto.getType(),
                         userDto.getFirstName(),
                         userDto.getLastName(),

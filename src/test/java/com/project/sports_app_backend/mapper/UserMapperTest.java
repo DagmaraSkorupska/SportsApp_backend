@@ -35,7 +35,7 @@ public class UserMapperTest {
         //given
         List<SportEntity> sport = new ArrayList<>();
         List<Reservation> reservationEntities = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(1L, UserType.USER, "name", "lastName", "email", "password", "desc", "123456798", sport, reservationEntities);
+        UserEntity userEntity = new UserEntity(UserType.USER, "name", "lastName", "email", "password", "desc", "123456798", sport, reservationEntities);
         //when
         UserDto userDto = userMapper.mapToUserDto(userEntity);
         String name = userDto.getFirstName();
@@ -49,7 +49,7 @@ public class UserMapperTest {
         List<SportEntity> sport = new ArrayList<>();
         List<Reservation> reservationEntities = new ArrayList<>();
         List<UserEntity> userEntities = new ArrayList<>();
-        userEntities.add(new UserEntity(9L,UserType.USER, "name", "lastName", "email", "password", "desc", "123456798", sport, reservationEntities));
+        userEntities.add(new UserEntity(UserType.USER, "name", "lastName", "email", "password", "desc", "123456798", sport, reservationEntities));
         //when
         List<UserDto> userDtos = userMapper.mapToUserDtoList(userEntities);
         int size = userDtos.size();

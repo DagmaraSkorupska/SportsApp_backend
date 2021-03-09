@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.4.2'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'com.vaadin' version '0.14.3.7'
     id 'java'
 }
 
@@ -9,18 +10,23 @@ plugins {
 
 group = 'com.project'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = '15'
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    set('vaadinVersion', "14.4.8")
+}
+
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
-
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('mysql:mysql-connector-java')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+    implementation 'com.vaadin:vaadin-spring-boot-starter'
 
     compileOnly('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
@@ -31,6 +37,13 @@ dependencies {
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.1")
     compile('com.google.code.gson:gson:2.8.2')
 }
+
+dependencyManagement {
+    imports {
+        mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
+    }
+}
+
 
 test {
     useJUnitPlatform()
