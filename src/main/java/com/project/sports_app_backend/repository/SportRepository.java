@@ -4,6 +4,7 @@ import com.project.sports_app_backend.domain.SportEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +16,11 @@ public interface SportRepository extends CrudRepository<SportEntity, Long> {
 
    @Override
    Optional<SportEntity> findById(Long id);
+
+
+   SportEntity findByName(String name);
+
+//   Optional<SportEntity> findByName();
 
    @Override
    <Sport2 extends SportEntity> Sport2 save(Sport2 sport);

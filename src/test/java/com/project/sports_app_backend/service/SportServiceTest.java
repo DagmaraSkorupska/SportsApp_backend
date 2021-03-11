@@ -31,8 +31,8 @@ public class SportServiceTest {
         //given
         List<SportEntity> sportEntities = new ArrayList<>();
         List<UserEntity> userEntities = new ArrayList<>();
-        sportEntities.add(new SportEntity(1234L,"name", "decs", userEntities, new WorkoutEntity()));
-        sportEntities.add(new SportEntity(4567L,"name2", "decs2", userEntities, new WorkoutEntity()));
+        sportEntities.add(new SportEntity("name", "decs", userEntities, new WorkoutEntity()));
+        sportEntities.add(new SportEntity("name2", "decs2", userEntities, new WorkoutEntity()));
         when(sportRepository.findAll()).thenReturn(sportEntities);
         //when
         List<SportEntity> resultList = sportService.getAllSports();
@@ -46,12 +46,12 @@ public class SportServiceTest {
     public void testGetSport(){
         //given
         List<UserEntity> userEntities = new ArrayList<>();
-        SportEntity sportEntity = (new SportEntity(1234L,"name", "decs", userEntities, new WorkoutEntity()));
-        when(sportRepository.findById(1234L)).thenReturn(Optional.of(sportEntity));
+        SportEntity sportEntity = (new SportEntity("name", "decs", userEntities, new WorkoutEntity()));
+        when(sportRepository.findById(sportEntity.getId())).thenReturn(Optional.of(sportEntity));
         //when
-        SportEntity result = sportService.getSport(1234L).orElse(new SportEntity());
+        SportEntity result = sportService.getSport(sportEntity.getId()).orElse(new SportEntity());
         //then
-        assertEquals(1234L, result.getId());
+        assertEquals(sportEntity.getId(), result.getId());
         sportRepository.deleteAll();
     }
 
@@ -59,7 +59,7 @@ public class SportServiceTest {
     public void testSaveSport(){
         //given
         List<UserEntity> userEntities = new ArrayList<>();
-        SportEntity sportEntity = (new SportEntity(1234L,"name", "decs", userEntities, new WorkoutEntity()));
+        SportEntity sportEntity = (new SportEntity("name", "decs", userEntities, new WorkoutEntity()));
         when(sportRepository.save(sportEntity)).thenReturn(sportEntity);
         //when
         SportEntity result = sportService.saveSport(sportEntity);

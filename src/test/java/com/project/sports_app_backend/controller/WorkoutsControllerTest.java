@@ -63,7 +63,7 @@ public class WorkoutsControllerTest {
         List<SportDto> sportDtos = new ArrayList<>();
         List<SportEntity> sportEntities = new ArrayList<>();
         WorkoutDto workoutDto = new WorkoutDto(78L, "name", "desc", 23, 45, "address", sportDtos);
-        WorkoutEntity workoutEntity = new WorkoutEntity(78L, "name", "desc", 23, 45, "address", sportEntities);
+        WorkoutEntity workoutEntity = new WorkoutEntity( "name", "desc", 23, 45, "address", sportEntities);
 
         when(workoutMapper.mapToWorkoutDto(workoutEntity)).thenReturn(workoutDto);
         when(workoutService.getWorkoutById(workoutEntity.getId())).thenReturn(Optional.of(workoutEntity));
@@ -85,7 +85,7 @@ public class WorkoutsControllerTest {
         List<SportDto> sportDtos = new ArrayList<>();
         List<SportEntity> sportEntities = new ArrayList<>();
         WorkoutDto workoutDto = new WorkoutDto(78L, "name", "desc", 23, 45, "address", sportDtos);
-        WorkoutEntity workoutEntity = new WorkoutEntity(78L, "name", "desc", 23, 45, "address", sportEntities);
+        WorkoutEntity workoutEntity = new WorkoutEntity("name", "desc", 23, 45, "address", sportEntities);
 
         when(workoutService.saveWorkout(workoutEntity)).thenReturn(workoutEntity);
         when(workoutMapper.mapToWorkoutEntity(workoutDto)).thenReturn(workoutEntity);
@@ -107,7 +107,7 @@ public class WorkoutsControllerTest {
         List<SportDto> sportDtos = new ArrayList<>();
         List<SportEntity> sportEntities = new ArrayList<>();
         WorkoutDto workoutDto = new WorkoutDto(78L, "name", "desc", 23, 45, "address", sportDtos);
-        WorkoutEntity workoutEntity = new WorkoutEntity(78L, "name", "desc", 23, 45, "address", sportEntities);
+        WorkoutEntity workoutEntity = new WorkoutEntity("name", "desc", 23, 45, "address", sportEntities);
 
         when(workoutMapper.mapToWorkoutDto(workoutEntity)).thenReturn(workoutDto);
         when(workoutService.saveWorkout(workoutEntity)).thenReturn(workoutEntity);

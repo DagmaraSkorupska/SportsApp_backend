@@ -38,7 +38,7 @@ public class ReservationServiceTest {
     public void testGetAllReservation(){
         //given
         List<Reservation> reservations = new ArrayList<>();
-        reservations.add(new Reservation(14L, 133, LocalDateTime.now(), new UserEntity(), new WorkoutEntity()));
+        reservations.add(new Reservation( 133, LocalDateTime.now(), new UserEntity(), new WorkoutEntity()));
         when(reservationRepository.findAll()).thenReturn(reservations);
         //when
         List<Reservation> resultList = reservationService.getAllReservation();
@@ -51,12 +51,12 @@ public class ReservationServiceTest {
     @Test
     public void testGetReservationById(){
         //given
-        Reservation reservation = new Reservation(14L, 133, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
-        when(reservationRepository.findById(14L)).thenReturn(Optional.of(reservation));
+        Reservation reservation = new Reservation(133, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
+        when(reservationRepository.findById(reservation.getId())).thenReturn(Optional.of(reservation));
         //when
-        Reservation result = reservationService.getReservationById(14L).orElse(new Reservation());
+        Reservation result = reservationService.getReservationById(reservation.getId()).orElse(new Reservation());
         //then
-        assertEquals(14L, result.getId());
+        assertEquals(reservation.getId(), result.getId());
         //clean up
         reservationRepository.deleteAll();
     }
@@ -65,21 +65,21 @@ public class ReservationServiceTest {
     @Test
     public void testGetReservationByDate(){
         //given
-        Reservation reservation = new Reservation(14L, 133, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
+        Reservation reservation = new Reservation( 133, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
         when(reservationRepository.findByDate(LocalDateTime.now())).thenReturn(Optional.of(reservation));
         //when
         Reservation result = reservationService.getReservationByDate(LocalDateTime.now()).orElse(new Reservation());
         //then
-        assertEquals( 14L, result.getId());
+        assertEquals( 133, result.getToPay());
     }
 
     @Test
     public void testReservationByUserLogin(){
         //given
         List<Reservation> reservations = new ArrayList<>();
-        reservations.add(new Reservation(14L, 133, LocalDateTime.now(), new UserEntity(), new WorkoutEntity()));
+        reservations.add(new Reservation( 133, LocalDateTime.now(), new UserEntity(), new WorkoutEntity()));
         List<SportEntity> sportEntities = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+        UserEntity userEntity = new UserEntity(UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
         when(reservationRepository.findByUserEntity(userEntity)).thenReturn(reservations);
         when(userRepository.findByEmail(userEntity.getEmail())).thenReturn(Optional.of(userEntity));
         //when
@@ -91,7 +91,7 @@ public class ReservationServiceTest {
     @Test
     public void testSaveReservation(){
         //given
-        Reservation reservation = new Reservation(14L, 133, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
+        Reservation reservation = new Reservation( 133, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
         when(reservationRepository.save(reservation)).thenReturn(reservation);
         //when
         Reservation result = reservationService.saveReservation(reservation);

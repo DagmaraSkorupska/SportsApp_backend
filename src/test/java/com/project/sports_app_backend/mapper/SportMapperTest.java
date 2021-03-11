@@ -33,7 +33,7 @@ public class SportMapperTest {
     public void testMapToSportDto(){
         //given
         List<UserEntity> userDtos = new ArrayList<>();
-        SportEntity sportEntity = new SportEntity( 1L,"name", "description", userDtos, new WorkoutEntity());
+        SportEntity sportEntity = new SportEntity("name", "description", userDtos, new WorkoutEntity());
         //when
         SportDto sportDto = sportMapper.mapToSportDto(sportEntity);
         String name = sportDto.getName();
@@ -46,7 +46,7 @@ public class SportMapperTest {
         //given
         List<UserEntity> userDtos = new ArrayList<>();
         List<SportEntity> sportEntities = new ArrayList<>();
-        sportEntities.add(new SportEntity( 1L,"name", "description", userDtos, new WorkoutEntity()));
+        sportEntities.add(new SportEntity("name", "description", userDtos, new WorkoutEntity()));
         //when
         List<SportDto> sportDtos = sportMapper.mapToSportDtoList(sportEntities);
         int size = sportDtos.size();

@@ -32,7 +32,7 @@ public class UserServiceTest {
         List<UserEntity> userEntityList = new ArrayList<>();
         List<SportEntity> sportEntities = new ArrayList<>();
         List<Reservation> reservations = new ArrayList<>();
-        userEntityList.add(new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations));
+        userEntityList.add(new UserEntity(UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations));
         when(userRepository.findAll()).thenReturn(userEntityList);
         //when
         List<UserEntity> resultList = userService.getAllUsers();
@@ -48,12 +48,12 @@ public class UserServiceTest {
         //given
         List<SportEntity> sportEntities = new ArrayList<>();
         List<Reservation> reservations = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
-        when(userRepository.findById(12L)).thenReturn(Optional.of(userEntity));
+        UserEntity userEntity = new UserEntity(UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+        when(userRepository.findById(userEntity.getId())).thenReturn(Optional.of(userEntity));
         //when
-        UserEntity result = userService.getUserById(12L).orElse(new UserEntity());
+        UserEntity result = userService.getUserById(userEntity.getId()).orElse(new UserEntity());
         //then
-        assertEquals(12L, result.getId());
+        assertEquals(userEntity.getId(), result.getId());
         //cleanUp
         userRepository.deleteAll();
     }
@@ -63,7 +63,7 @@ public class UserServiceTest {
         //given
         List<SportEntity> sportEntities = new ArrayList<>();
         List<Reservation> reservations = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+        UserEntity userEntity = new UserEntity(UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
         when(userRepository.findByFirstName("firstname")).thenReturn(Optional.of(userEntity));
         //when
         UserEntity result = userService.getUserByFirstName("firstname").orElse(new UserEntity());
@@ -78,7 +78,7 @@ public class UserServiceTest {
         //given
         List<SportEntity> sportEntities = new ArrayList<>();
         List<Reservation> reservations = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+        UserEntity userEntity = new UserEntity(UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
         when(userRepository.findByLastName("lastname")).thenReturn(Optional.of(userEntity));
         //when
         UserEntity result = userService.getUserByLastName("lastname").orElse(new UserEntity());
@@ -93,7 +93,7 @@ public class UserServiceTest {
         //given
         List<SportEntity> sportEntities = new ArrayList<>();
         List<Reservation> reservations = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+        UserEntity userEntity = new UserEntity(UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
         when(userRepository.findByEmail("email@test.com")).thenReturn(Optional.of(userEntity));
         //when
         UserEntity result = userService.getUserByEmail("email@test.com").orElse(new UserEntity());
@@ -108,7 +108,7 @@ public class UserServiceTest {
         //given
         List<SportEntity> sportEntities = new ArrayList<>();
         List<Reservation> reservations = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(12L, UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+        UserEntity userEntity = new UserEntity( UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
         when(userRepository.save(userEntity)).thenReturn(userEntity);
         //when
         UserEntity result = userService.saveUser(userEntity);

@@ -37,7 +37,7 @@ public class ReservationMapperTest {
     @Test
     public void testMapToReservationDto() {
         //given
-        Reservation reservationEntity = new Reservation(40L, 10, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
+        Reservation reservationEntity = new Reservation( 10, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
 
         //when
         ReservationDto reservationDto = reservationMapper.mapToReservationDto(reservationEntity);
@@ -50,7 +50,7 @@ public class ReservationMapperTest {
     public void testMapToReservationDtoList() {
         //given
         List<Reservation> reservationEntities = new ArrayList<>();
-        reservationEntities.add(new Reservation(50L, 10, LocalDateTime.now(), new UserEntity(), new WorkoutEntity()));
+        reservationEntities.add(new Reservation( 10, LocalDateTime.now(), new UserEntity(), new WorkoutEntity()));
         //when
         List<ReservationDto> reservationDtos = reservationMapper.mapToReservationDtoList(reservationEntities);
         int size = reservationDtos.size();

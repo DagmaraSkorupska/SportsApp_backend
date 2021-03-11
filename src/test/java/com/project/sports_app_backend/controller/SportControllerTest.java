@@ -59,7 +59,7 @@ public class SportControllerTest {
         List<UserDto> userDtos = new ArrayList<>();
         List<UserEntity> userEntities = new ArrayList<>();
         SportDto sportDto = new SportDto(15L, "name", "description",userDtos, new WorkoutDto());
-        SportEntity sportEntity = new SportEntity(15L, "name", "description",userEntities, new WorkoutEntity());
+        SportEntity sportEntity = new SportEntity("name", "description",userEntities, new WorkoutEntity());
 
         when(sportMapper.mapToSportDto(sportEntity)).thenReturn(sportDto);
         when(service.getSport(sportEntity.getId())).thenReturn(Optional.of(sportEntity));
@@ -68,7 +68,6 @@ public class SportControllerTest {
         mockMvc.perform(get("/v1/sports/15")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(15)))
                 .andExpect(jsonPath("$.name", is("name")))
                 .andExpect(jsonPath("$.description", is("description")));
     }
@@ -79,7 +78,7 @@ public class SportControllerTest {
         List<UserDto> userDtos = new ArrayList<>();
         List<UserEntity> userEntities = new ArrayList<>();
         SportDto sportDto = new SportDto(15L, "name", "description",userDtos, new WorkoutDto());
-        SportEntity sportEntity = new SportEntity(15L, "name", "description",userEntities, new WorkoutEntity());
+        SportEntity sportEntity = new SportEntity("name", "description",userEntities, new WorkoutEntity());
 
         when(service.saveSport(sportEntity)).thenReturn(sportEntity);
         when(sportMapper.mapToSportEntity(sportDto)).thenReturn(sportEntity);
@@ -101,7 +100,7 @@ public class SportControllerTest {
         List<UserDto> userDtos = new ArrayList<>();
         List<UserEntity> userEntities = new ArrayList<>();
         SportDto sportDto = new SportDto(15L, "name", "description",userDtos, new WorkoutDto());
-        SportEntity sportEntity = new SportEntity(15L, "name", "description",userEntities, new WorkoutEntity());
+        SportEntity sportEntity = new SportEntity("name", "description",userEntities, new WorkoutEntity());
 
         when(sportMapper.mapToSportDto(sportEntity)).thenReturn(sportDto);
         when(service.saveSport(sportEntity)).thenReturn(sportEntity);

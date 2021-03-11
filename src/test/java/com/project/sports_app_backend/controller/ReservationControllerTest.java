@@ -59,7 +59,7 @@ public class ReservationControllerTest {
     public void shouldGetOneReservationFromId() throws Exception {
         //given
         ReservationDto reservationDto = new ReservationDto(78L, 23, LocalDateTime.now(), new UserDto(), new WorkoutDto());
-        Reservation reservation = new Reservation(78L, 23, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
+        Reservation reservation = new Reservation( 23, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
 
         when(reservationMapper.mapToReservationDto(reservation)).thenReturn(reservationDto);
         when(reservationService.getReservationById(reservation.getId())).thenReturn(Optional.of(reservation));
@@ -67,7 +67,6 @@ public class ReservationControllerTest {
         mockMvc.perform(get("/v1/reservations/id = 78")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(78)))
                 .andExpect(jsonPath("$.toPay", is(23.0)));
     }
 
@@ -91,12 +90,12 @@ public class ReservationControllerTest {
     public void shouldGetOneReservationFromEmail() throws Exception {
         //given
         List<ReservationDto> reservationDtos = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(10L, USER, "user2", "abc2", "test@mail.com", "password1", "desc", "1324679", null, null);
+        UserEntity userEntity = new UserEntity(USER, "user2", "abc2", "test@mail.com", "password1", "desc", "1324679", null, null);
         UserDto userDto = new UserDto(10L, USER, "user2", "abc2", "test@mail.com", "password1", "desc", "1324679", null, null);
 
         reservationDtos.add(new ReservationDto(78L, 23, LocalDateTime.now(), userDto, new WorkoutDto()));
         List<Reservation> reservations = new ArrayList<>();
-        reservations.add(new Reservation(78L, 23, LocalDateTime.now(), userEntity, new WorkoutEntity()));
+        reservations.add(new Reservation( 23, LocalDateTime.now(), userEntity, new WorkoutEntity()));
 
         when(reservationMapper.mapToReservationDtoList(reservations)).thenReturn(reservationDtos);
         when(reservationService.getReservationByUserLogin(reservations.get(0).getUserEntity().getEmail())).thenReturn(reservations);
@@ -105,7 +104,6 @@ public class ReservationControllerTest {
         mockMvc.perform(get("/v1/reservations/login = test@mail.com")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id", is(78)))
                 .andExpect(jsonPath("$[0].toPay", is(23.0)));
     }
 
@@ -113,7 +111,7 @@ public class ReservationControllerTest {
     public void shouldCreateReservation() throws Exception {
         //given
         ReservationDto reservationDto = new ReservationDto(78L, 23, LocalDateTime.now(), new UserDto(), new WorkoutDto());
-        Reservation reservation = new Reservation(78L, 23, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
+        Reservation reservation = new Reservation( 23, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
 
         when(reservationService.saveReservation(reservation)).thenReturn(reservation);
         when(reservationMapper.mapToReservationEntity(reservationDto)).thenReturn(reservation);
@@ -134,7 +132,7 @@ public class ReservationControllerTest {
     public void shouldUpdateReservation() throws Exception {
         //given
         ReservationDto reservationDto = new ReservationDto(78L, 23, LocalDateTime.now(), new UserDto(), new WorkoutDto());
-        Reservation reservation = new Reservation(78L, 23, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
+        Reservation reservation = new Reservation( 23, LocalDateTime.now(), new UserEntity(), new WorkoutEntity());
 
         when(reservationMapper.mapToReservationDto(reservation)).thenReturn(reservationDto);
         when(reservationService.saveReservation(reservation)).thenReturn(reservation);
@@ -149,7 +147,6 @@ public class ReservationControllerTest {
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(78)))
                 .andExpect(jsonPath("$.toPay", is(23.0)));
     }
 

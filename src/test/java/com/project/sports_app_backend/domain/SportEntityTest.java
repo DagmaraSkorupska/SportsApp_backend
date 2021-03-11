@@ -23,7 +23,7 @@ public class SportEntityTest {
     @Test
     public void testSaveNewSport(){
         //Given
-        SportEntity sport1 = new SportEntity(1L,"Swim", "desc",null, null);
+        SportEntity sport1 = new SportEntity("Swim", "desc",null, null);
         sportRepository.save(sport1);
 
         //When
@@ -41,7 +41,7 @@ public class SportEntityTest {
     @Test
     public void testDeleteSport(){
         //Given
-        SportEntity sport1 = new SportEntity(1L, "Swim2", "desc2", null, null);
+        SportEntity sport1 = new SportEntity("Swim2", "desc2", null, null);
         SportEntity save = sportRepository.save(sport1);
 
         //When

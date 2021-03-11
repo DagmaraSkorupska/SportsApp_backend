@@ -43,7 +43,7 @@ public class UserEntity implements UserDetails {
 
     private List<SportEntity> sports = new ArrayList<>();
     @Access(AccessType.PROPERTY)
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "JOIN_SPORT_USER",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")},

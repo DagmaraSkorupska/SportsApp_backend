@@ -20,7 +20,6 @@ public class SportMapper {
 
     public SportEntity mapToSportEntity( SportDto sportDto) {
         return new SportEntity(
-                sportDto.getId(),
                 sportDto.getName(),
                 sportDto.getDescription(),
                 userMapper.mapToUserEntityList(sportDto.getUsers()),
@@ -53,7 +52,6 @@ public class SportMapper {
     public List<SportEntity> mapToSportEntityList(List<SportDto> sportDtos) {
         return sportDtos.stream()
                 .map(sport -> new SportEntity(
-                        sport.getId(),
                         sport.getName(),
                         sport.getDescription(),
                         userMapper.mapToUserEntityList(sport.getUsers()),

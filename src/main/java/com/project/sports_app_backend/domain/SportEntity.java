@@ -7,26 +7,24 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity(name = "sports")
 @Table(name="SPORTS")
 public class SportEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "SPORT_ID",unique = true, nullable = false)
     private Long id;
 
     @Column(name="SPORT_TYPE", nullable = false)
-    private String name;
+    public String name;
 
     @Column(name="DESCRIPTION", nullable = false)
     private String description;
 
     private List<UserEntity> users = new ArrayList<>();
     @Access(AccessType.PROPERTY)
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "sports")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "sports", fetch = FetchType.EAGER)
     public List<UserEntity> getUsers() {
         return users;
     }
@@ -43,6 +41,15 @@ public class SportEntity {
         this.workouts = workouts;
     }
 
+    public SportEntity() {
+    }
+
+    public SportEntity(String name, String description, List<UserEntity> users, WorkoutEntity workouts) {
+        this.name = name;
+        this.description = description;
+        this.users = users;
+        this.workouts = workouts;
+    }
 
     public Long getId() {
         return id;
@@ -70,5 +77,16 @@ public class SportEntity {
 
     public void setUsers(List<UserEntity> users) {
         this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "SportEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", users=" + users +
+                ", workouts=" + workouts +
+                '}';
     }
 }

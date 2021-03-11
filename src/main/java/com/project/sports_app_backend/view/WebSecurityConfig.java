@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -34,11 +35,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/hello").hasRole("USER")
-                .and()
-                .formLogin().permitAll()
-                .and()
+        http
+                .authorizeRequests()
+                .antMatchers("/hello").hasAuthority(String.valueOf(UserType.USER))
+        .and().formLogin()
+//                    .usernameParameter("email")
+//                    .passwordParameter("password")
+//                    .defaultSuccessUrl("/default")
+//                    .failureUrl("/login?error").permitAll()
+       .and().logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true).permitAll()
+       .and()
                 .csrf().disable();
     }
 

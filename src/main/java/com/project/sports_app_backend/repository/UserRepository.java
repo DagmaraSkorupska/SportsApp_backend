@@ -16,12 +16,9 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
     @Override
     Optional<UserEntity> findById(Long id);
 
-
     Optional<UserEntity> findByFirstName(String firstName);
 
-
     Optional<UserEntity> findByLastName(String lastName);
-
 
     Optional<UserEntity> findByEmail(String email);
 

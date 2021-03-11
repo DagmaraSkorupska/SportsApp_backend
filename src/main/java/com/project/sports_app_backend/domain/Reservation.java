@@ -11,9 +11,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "RESERVATIONS")
-@NoArgsConstructor
-@AllArgsConstructor
-
 public class Reservation {
 
     @Id
@@ -50,6 +47,16 @@ public class Reservation {
 
     public void setWorkoutEntity(WorkoutEntity workoutEntity) {
         this.workoutEntity = workoutEntity;
+    }
+
+    public Reservation(double toPay, LocalDateTime date, UserEntity userEntity, WorkoutEntity workoutEntity) {
+        this.toPay = toPay;
+        this.date = date;
+        this.userEntity = userEntity;
+        this.workoutEntity = workoutEntity;
+    }
+
+    public Reservation() {
     }
 
     public long getId() {

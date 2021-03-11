@@ -32,8 +32,8 @@ public class WorkoutServiceTest {
         //given
         List<WorkoutEntity> workoutEntities = new ArrayList<>();
         List<SportEntity> sportEntities = new ArrayList<>();
-        workoutEntities.add(new WorkoutEntity(1234L,"name", "decs", 60, 120, "address", sportEntities));
-        workoutEntities.add(new WorkoutEntity(456L,"name2", "decs2", 60, 120, "address2", sportEntities));
+        workoutEntities.add(new WorkoutEntity("name", "decs", 60, 120, "address", sportEntities));
+        workoutEntities.add(new WorkoutEntity("name2", "decs2", 60, 120, "address2", sportEntities));
         when(workoutRepository.findAll()).thenReturn(workoutEntities);
         //when
         List<WorkoutEntity> resultList = workoutService.getAllWorkout();
@@ -46,12 +46,12 @@ public class WorkoutServiceTest {
     @Test
     public void testGetWorkoutById(){
         List<SportEntity> sportEntities = new ArrayList<>();
-        WorkoutEntity workoutEntity = (new WorkoutEntity(1234L,"name", "decs", 60, 120, "address", sportEntities));
-        when(workoutRepository.findById(1234L)).thenReturn(Optional.of(workoutEntity));
+        WorkoutEntity workoutEntity = (new WorkoutEntity("name", "decs", 60, 120, "address", sportEntities));
+        when(workoutRepository.findById(workoutEntity.getId())).thenReturn(Optional.of(workoutEntity));
         //when
-        WorkoutEntity result = workoutService.getWorkoutById(1234L).orElse(new WorkoutEntity());
+        WorkoutEntity result = workoutService.getWorkoutById(workoutEntity.getId()).orElse(new WorkoutEntity());
         //then
-        assertEquals(1234L, result.getId());
+        assertEquals(workoutEntity.getId(), result.getId());
         //cleanUp
         workoutRepository.deleteAll();
     }
@@ -59,7 +59,7 @@ public class WorkoutServiceTest {
     @Test
     public void testSaveWorkout(){
         List<SportEntity> sportEntities = new ArrayList<>();
-        WorkoutEntity workoutEntity = (new WorkoutEntity(1234L,"name", "decs", 60, 120, "address", sportEntities));
+        WorkoutEntity workoutEntity = (new WorkoutEntity("name", "decs", 60, 120, "address", sportEntities));
         when(workoutRepository.save(workoutEntity)).thenReturn(workoutEntity);
         //when
         WorkoutEntity result = workoutService.saveWorkout(workoutEntity);
