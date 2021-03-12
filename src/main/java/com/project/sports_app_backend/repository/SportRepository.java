@@ -18,7 +18,7 @@ public interface SportRepository extends CrudRepository<SportEntity, Long> {
    Optional<SportEntity> findById(Long id);
 
 
-   SportEntity findByName(String name);
+//   SportEntity findByName(String name);
 
 //   Optional<SportEntity> findByName();
 

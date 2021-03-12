@@ -1,7 +1,4 @@
 package com.project.sports_app_backend.domain;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 
 import javax.persistence.*;
 import java.util.ArrayList;
