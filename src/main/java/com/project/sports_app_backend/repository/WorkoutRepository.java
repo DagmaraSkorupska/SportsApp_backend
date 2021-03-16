@@ -6,7 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +27,11 @@ public interface WorkoutRepository extends CrudRepository<WorkoutEntity, Long> {
 
     @Override
     void delete(WorkoutEntity workoutEntity);
+
+    void findByHour(String hour);
+    void findByDay(String day);
+//    WorkoutEntity findByPay();
+
 
     @Query("select w from WorkoutEntity w " +
             "where lower(w.name) like lower(concat('%', :searchTerm, '%'))")

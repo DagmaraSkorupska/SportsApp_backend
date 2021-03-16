@@ -22,6 +22,6 @@ public class UserDto {
     private String password;
     private String description;
     private String phone;
-    private  List<SportDto> sportId = new ArrayList<>();
-    private  List<ReservationDto> reservationDtos = new ArrayList<>() ;
+    private List<WorkoutDto> workoutDtos = new ArrayList<>() ;
+    private List<ReservationDto> reservationDtos = new ArrayList<>() ;
 }

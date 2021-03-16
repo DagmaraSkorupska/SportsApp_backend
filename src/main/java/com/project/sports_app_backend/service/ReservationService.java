@@ -29,9 +29,6 @@ public class ReservationService {
         return reservationRepository.findById(id);
     }
 
-    public Optional<Reservation> getReservationByDate(LocalDateTime date){
-        return reservationRepository.findByDate(date);
-    }
 
     public List<Reservation> getReservationByUserLogin(String login){
         UserEntity user = userRepository.findByEmail(login).orElse(new UserEntity());

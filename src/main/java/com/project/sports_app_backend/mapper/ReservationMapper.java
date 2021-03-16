@@ -16,45 +16,49 @@ public class ReservationMapper {
     @Autowired
     private UserMapper userMapper;
 
-    public Reservation mapToReservationEntity(ReservationDto reservationDto )  {
+    public Reservation mapToReservationEntity(ReservationDto reservationDto) {
         return new Reservation(
                 reservationDto.getToPay(),
-                reservationDto.getDate(),
+                reservationDto.getDay(),
+                reservationDto.getHour(),
                 userMapper.mapToUserEntity(reservationDto.getUserId()),
                 workoutMapper.mapToWorkoutEntity(reservationDto.getWorkoutDto())
         );
     }
 
-    public ReservationDto mapToReservationDto( Reservation reservationEntity){
+    public ReservationDto mapToReservationDto(Reservation reservationEntity) {
         return new ReservationDto(
                 reservationEntity.getId(),
                 reservationEntity.getToPay(),
-                reservationEntity.getDate(),
+                reservationEntity.getDay(),
+                reservationEntity.getHour(),
                 userMapper.mapToUserDto(reservationEntity.getUserEntity()),
                 workoutMapper.mapToWorkoutDto(reservationEntity.getWorkoutEntity())
         );
     }
 
-    public List<ReservationDto> mapToReservationDtoList(List<Reservation> reservationEntity){
+    public List<ReservationDto> mapToReservationDtoList(List<Reservation> reservationEntity) {
         return reservationEntity.stream()
                 .map(reservation -> new ReservationDto(
                         reservation.getId(),
                         reservation.getToPay(),
-                        reservation.getDate(),
+                        reservation.getDay(),
+                        reservation.getHour(),
                         userMapper.mapToUserDto(reservation.getUserEntity()),
                         workoutMapper.mapToWorkoutDto(reservation.getWorkoutEntity())
                 ))
                 .collect(Collectors.toList());
     }
 
-    public List<Reservation> mapToReservationEntityList(List<ReservationDto> reservationDtos){
+    public List<Reservation> mapToReservationEntityList(List<ReservationDto> reservationDtos) {
         return reservationDtos.stream()
                 .map(reservationDto -> new Reservation(
-                                reservationDto.getToPay(),
-                                reservationDto.getDate(),
-                                userMapper.mapToUserEntity(reservationDto.getUserId()),
-                                workoutMapper.mapToWorkoutEntity(reservationDto.getWorkoutDto())
-                    ))
+                        reservationDto.getToPay(),
+                        reservationDto.getDay(),
+                        reservationDto.getHour(),
+                        userMapper.mapToUserEntity(reservationDto.getUserId()),
+                        workoutMapper.mapToWorkoutEntity(reservationDto.getWorkoutDto())
+                ))
                 .collect(Collectors.toList());
     }
 }

@@ -23,9 +23,6 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
     Optional<Reservation> findById(Long id);
 
 
-    Optional<Reservation> findByDate(LocalDateTime date);
-
-
     List<Reservation> findByUserEntity(UserEntity user);
 
     @Override

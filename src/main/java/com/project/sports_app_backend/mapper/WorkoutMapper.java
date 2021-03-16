@@ -13,10 +13,10 @@ import java.util.stream.Collectors;
 public class WorkoutMapper {
 
     @Autowired
-    private SportMapper sportMapper;
+    private ReservationMapper reservationMapper;
 
     @Autowired
-    private ReservationMapper reservationMapper;
+    private UserMapper userMapper;
 
     public WorkoutEntity mapToWorkoutEntity( WorkoutDto workoutDto)  {
         return new WorkoutEntity(
@@ -25,7 +25,9 @@ public class WorkoutMapper {
                 workoutDto.getDurationMin(),
                 workoutDto.getPrice1h(),
                 workoutDto.getAddress(),
-                sportMapper.mapToSportEntityList(workoutDto.getSport())
+                workoutDto.getDay(),
+                workoutDto.getHour(),
+                userMapper.mapToUserEntity(workoutDto.getUserDtos())
         );
     }
 
@@ -37,7 +39,9 @@ public class WorkoutMapper {
                 workoutEntity.getDurationMin(),
                 workoutEntity.getPrice1h(),
                 workoutEntity.getAddress(),
-                sportMapper.mapToSportDtoList(workoutEntity.getSport())
+                userMapper.mapToUserDto(workoutEntity.getUser()),
+                workoutEntity.getDay(),
+                workoutEntity.getHour()
         );
     }
 
@@ -50,9 +54,25 @@ public class WorkoutMapper {
                         workout.getDurationMin(),
                         workout.getPrice1h(),
                         workout.getAddress(),
-                        sportMapper.mapToSportDtoList(workout.getSport())
+                        userMapper.mapToUserDto(workout.getUser()),
+                        workout.getDay(),
+                        workout.getHour()
                 ))
                 .collect(Collectors.toList());
     }
 
+    public List<WorkoutEntity> mapToWorkoutEntityList(List<WorkoutDto> workoutDtos) {
+        return workoutDtos.stream()
+                .map(workout -> new WorkoutEntity(
+                        workout.getName(),
+                        workout.getDescription(),
+                        workout.getDurationMin(),
+                        workout.getPrice1h(),
+                        workout.getAddress(),
+                        workout.getDay(),
+                        workout.getHour(),
+                        userMapper.mapToUserEntity(workout.getUserDtos())
+                ))
+                .collect(Collectors.toList());
+    }
 }

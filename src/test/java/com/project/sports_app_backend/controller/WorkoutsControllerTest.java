@@ -1,8 +1,8 @@
 package com.project.sports_app_backend.controller;
 
 import com.google.gson.Gson;
-import com.project.sports_app_backend.domain.SportDto;
-import com.project.sports_app_backend.domain.SportEntity;
+import com.project.sports_app_backend.domain.UserDto;
+import com.project.sports_app_backend.domain.UserEntity;
 import com.project.sports_app_backend.domain.WorkoutDto;
 import com.project.sports_app_backend.domain.WorkoutEntity;
 import com.project.sports_app_backend.mapper.WorkoutMapper;
@@ -41,8 +41,8 @@ public class WorkoutsControllerTest {
     public void shouldGetWorkouts() throws Exception {
         //given
         List<WorkoutDto> workoutDtos = new ArrayList<>();
-        List<SportDto> sportDtos = new ArrayList<>();
-        workoutDtos.add(new WorkoutDto(78L, "name", "desc", 23, 45, "address", sportDtos ));
+        List<UserDto> userDtos = new ArrayList<>();
+        workoutDtos.add(new WorkoutDto(78L, "name", "desc", 23, 45, "address", userDtos ));
         when(workoutMapper.mapToWorkoutDtoList(workoutService.getAllWorkout())).thenReturn(workoutDtos);
         //when&then
         mockMvc.perform(get("/v1/workouts")
@@ -60,10 +60,10 @@ public class WorkoutsControllerTest {
     @Test
     public void shouldGetOneWorkouts()throws Exception {
         //given
-        List<SportDto> sportDtos = new ArrayList<>();
-        List<SportEntity> sportEntities = new ArrayList<>();
-        WorkoutDto workoutDto = new WorkoutDto(78L, "name", "desc", 23, 45, "address", sportDtos);
-        WorkoutEntity workoutEntity = new WorkoutEntity( "name", "desc", 23, 45, "address", sportEntities);
+        List<UserDto> userDtos = new ArrayList<>();
+        List<UserEntity> userEntities = new ArrayList<>();
+        WorkoutDto workoutDto = new WorkoutDto(78L, "name", "desc", 23, 45, "address", userDtos);
+        WorkoutEntity workoutEntity = new WorkoutEntity( "name", "desc", 23, 45, "address", userEntities);
 
         when(workoutMapper.mapToWorkoutDto(workoutEntity)).thenReturn(workoutDto);
         when(workoutService.getWorkoutById(workoutEntity.getId())).thenReturn(Optional.of(workoutEntity));
@@ -82,10 +82,10 @@ public class WorkoutsControllerTest {
     @Test
     public void shouldCreateWorkout() throws Exception{
         //given
-        List<SportDto> sportDtos = new ArrayList<>();
-        List<SportEntity> sportEntities = new ArrayList<>();
-        WorkoutDto workoutDto = new WorkoutDto(78L, "name", "desc", 23, 45, "address", sportDtos);
-        WorkoutEntity workoutEntity = new WorkoutEntity("name", "desc", 23, 45, "address", sportEntities);
+        List<UserDto> userDtos = new ArrayList<>();
+        List<UserEntity> userEntities = new ArrayList<>();
+        WorkoutDto workoutDto = new WorkoutDto(78L, "name", "desc", 23, 45, "address", userDtos);
+        WorkoutEntity workoutEntity = new WorkoutEntity("name", "desc", 23, 45, "address", userEntities);
 
         when(workoutService.saveWorkout(workoutEntity)).thenReturn(workoutEntity);
         when(workoutMapper.mapToWorkoutEntity(workoutDto)).thenReturn(workoutEntity);
@@ -104,10 +104,10 @@ public class WorkoutsControllerTest {
     @Test
     public void shouldUpdateWorkout() throws Exception{
         //given
-        List<SportDto> sportDtos = new ArrayList<>();
-        List<SportEntity> sportEntities = new ArrayList<>();
-        WorkoutDto workoutDto = new WorkoutDto(78L, "name", "desc", 23, 45, "address", sportDtos);
-        WorkoutEntity workoutEntity = new WorkoutEntity("name", "desc", 23, 45, "address", sportEntities);
+        List<UserDto> userDtos = new ArrayList<>();
+        List<UserEntity> userEntities = new ArrayList<>();
+        WorkoutDto workoutDto = new WorkoutDto(78L, "name", "desc", 23, 45, "address", userDtos);
+        WorkoutEntity workoutEntity = new WorkoutEntity("name", "desc", 23, 45, "address", userEntities);
 
         when(workoutMapper.mapToWorkoutDto(workoutEntity)).thenReturn(workoutDto);
         when(workoutService.saveWorkout(workoutEntity)).thenReturn(workoutEntity);

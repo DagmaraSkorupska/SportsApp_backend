@@ -78,8 +78,8 @@ public class ReservationServiceTest {
         //given
         List<Reservation> reservations = new ArrayList<>();
         reservations.add(new Reservation( 133, LocalDateTime.now(), new UserEntity(), new WorkoutEntity()));
-        List<SportEntity> sportEntities = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", sportEntities, reservations);
+        List<WorkoutEntity> workoutEntities = new ArrayList<>();
+        UserEntity userEntity = new UserEntity(UserType.USER, "firstname", "lastname", "email@test.com", "password", "desc", "132465798", workoutEntities, reservations);
         when(reservationRepository.findByUserEntity(userEntity)).thenReturn(reservations);
         when(userRepository.findByEmail(userEntity.getEmail())).thenReturn(Optional.of(userEntity));
         //when

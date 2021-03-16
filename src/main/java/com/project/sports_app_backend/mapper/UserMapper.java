@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class UserMapper {
     @Autowired
-    private SportMapper sportMapper;
+    private WorkoutMapper workoutMapper;
 
     @Autowired
     private ReservationMapper reservationMapper;
@@ -25,9 +25,7 @@ public class UserMapper {
                     userDto.getEmail(),
                     userDto.getPassword(),
                     userDto.getDescription(),
-                    userDto.getPhone(),
-                    sportMapper.mapToSportEntityList(userDto.getSportId()),
-                    reservationMapper.mapToReservationEntityList(userDto.getReservationDtos())
+                    userDto.getPhone()
             );
 
     }
@@ -42,7 +40,7 @@ public class UserMapper {
                 userEntity.getPassword(),
                 userEntity.getDescription(),
                 userEntity.getPhone(),
-                sportMapper.mapToSportDtoList(userEntity.getSports()),
+                workoutMapper.mapToWorkoutDtoList(userEntity.getWorkout()),
                 reservationMapper.mapToReservationDtoList(userEntity.getReservation())
         );
     }
@@ -58,7 +56,7 @@ public class UserMapper {
                         user.getPassword(),
                         user.getDescription(),
                         user.getPhone(),
-                        sportMapper.mapToSportDtoList(user.getSports()),
+                        workoutMapper.mapToWorkoutDtoList(user.getWorkout()),
                         reservationMapper.mapToReservationDtoList(user.getReservation())
                         ))
                 .collect(Collectors.toList());
@@ -73,9 +71,7 @@ public class UserMapper {
                         userDto.getEmail(),
                         userDto.getPassword(),
                         userDto.getDescription(),
-                        userDto.getPhone(),
-                        sportMapper.mapToSportEntityList(userDto.getSportId()),
-                        reservationMapper.mapToReservationEntityList(userDto.getReservationDtos())))
+                        userDto.getPhone()))
                 .collect(Collectors.toList());
     }
 }

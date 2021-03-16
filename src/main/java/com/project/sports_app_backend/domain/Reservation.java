@@ -21,9 +21,11 @@ public class Reservation {
     @Column(name = "TO_PAY", nullable = false)
     private double toPay;
 
-    @GeneratedValue
-    @Column(name = "DATE_RESERVATION", nullable = false)
-    private LocalDateTime date;
+    @Column(name = "DAY_WORKOUT", nullable = false)
+    private String day;
+
+    @Column(name = "HOUR_WORKOUT", nullable = false)
+    private String hour;
 
     private UserEntity userEntity;
     @Access(AccessType.PROPERTY)
@@ -39,7 +41,7 @@ public class Reservation {
 
     private WorkoutEntity workoutEntity;
     @Access(AccessType.PROPERTY)
-    @OneToOne( cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToOne( cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "WORKOUT_ID")
     public WorkoutEntity getWorkoutEntity() {
         return workoutEntity;
@@ -49,9 +51,10 @@ public class Reservation {
         this.workoutEntity = workoutEntity;
     }
 
-    public Reservation(double toPay, LocalDateTime date, UserEntity userEntity, WorkoutEntity workoutEntity) {
+    public Reservation(double toPay, String day, String hour, UserEntity userEntity, WorkoutEntity workoutEntity) {
         this.toPay = toPay;
-        this.date = date;
+        this.day = day;
+        this.hour = hour;
         this.userEntity = userEntity;
         this.workoutEntity = workoutEntity;
     }
@@ -75,11 +78,19 @@ public class Reservation {
         this.toPay = toPay;
     }
 
-    public LocalDateTime getDate() {
-        return date;
+    public String getDay() {
+        return day;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
     }
 }

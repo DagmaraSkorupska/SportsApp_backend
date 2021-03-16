@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 
 
 @Getter
@@ -13,7 +12,8 @@ import java.time.LocalDateTime;
 public class ReservationDto {
     private Long id;
     private double toPay;
-    private LocalDateTime date;
+    private String day;
+    private String hour;
     private UserDto userId;
     private WorkoutDto workoutDto;
 }

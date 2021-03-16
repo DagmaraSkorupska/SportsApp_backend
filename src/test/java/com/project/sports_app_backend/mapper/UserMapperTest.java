@@ -18,9 +18,9 @@ public class UserMapperTest {
     @Test
     public void testMapToUserEntity(){
         //given
-        List<SportDto> sportDto = new ArrayList<>();
+        List<WorkoutDto> workoutDtos = new ArrayList<>();
         List<ReservationDto> reservationDtos = new ArrayList<>();
-        UserDto userDto = new UserDto(1L, UserType.USER, "name", "lastName", "email", "password", "desc", "123456798", sportDto, reservationDtos);
+        UserDto userDto = new UserDto(1L, UserType.USER, "name", "lastName", "email", "password", "desc", "123456798", workoutDtos, reservationDtos);
         //when
         UserEntity userEntity = userMapper.mapToUserEntity(userDto);
         String name = userEntity.getFirstName();
@@ -33,9 +33,9 @@ public class UserMapperTest {
     @Test
     public void testMapToUserDto(){
         //given
-        List<SportEntity> sport = new ArrayList<>();
+        List<WorkoutEntity> workoutEntities = new ArrayList<>();
         List<Reservation> reservationEntities = new ArrayList<>();
-        UserEntity userEntity = new UserEntity(UserType.USER, "name", "lastName", "email", "password", "desc", "123456798", sport, reservationEntities);
+        UserEntity userEntity = new UserEntity(UserType.USER, "name", "lastName", "email", "password", "desc", "123456798", workoutEntities, reservationEntities);
         //when
         UserDto userDto = userMapper.mapToUserDto(userEntity);
         String name = userDto.getFirstName();
@@ -46,10 +46,10 @@ public class UserMapperTest {
     @Test
     public void testMapToUserDtoList(){
         //given
-        List<SportEntity> sport = new ArrayList<>();
+        List<WorkoutEntity> workoutEntities = new ArrayList<>();
         List<Reservation> reservationEntities = new ArrayList<>();
         List<UserEntity> userEntities = new ArrayList<>();
-        userEntities.add(new UserEntity(UserType.COUCH, "name", "lastName", "email", "password", "desc", "123456798", sport, reservationEntities));
+        userEntities.add(new UserEntity(UserType.COUCH, "name", "lastName", "email", "password", "desc", "123456798", workoutEntities, reservationEntities));
         //when
         List<UserDto> userDtos = userMapper.mapToUserDtoList(userEntities);
         int size = userDtos.size();
@@ -62,10 +62,10 @@ public class UserMapperTest {
     @Test
     public void testMapUserEntityList(){
         //given
-        List<SportDto> sportDto = new ArrayList<>();
+        List<WorkoutDto> workoutDtos = new ArrayList<>();
         List<ReservationDto> reservationDtos = new ArrayList<>();
         List<UserDto> userDtos = new ArrayList<>();
-        userDtos.add(new UserDto(1L, UserType.USER, "name", "lastName", "email", "password", "desc", "123456798", sportDto, reservationDtos));
+        userDtos.add(new UserDto(1L, UserType.USER, "name", "lastName", "email", "password", "desc", "123456798", workoutDtos, reservationDtos));
         //when
         List<UserEntity> userEntities = userMapper.mapToUserEntityList(userDtos);
         int size = userEntities.size();

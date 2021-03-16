@@ -35,21 +35,21 @@ public class UserEntity implements UserDetails {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @Column(name = "DESCRIPTION", nullable = false)
+    @Column(name = "DESCRIPTION", nullable = true)
     private String description;
 
     @Column(name = "PHONE", nullable = false)
     private String phone;
 
-    private List<SportEntity> sports = new ArrayList<>();
+    private List<WorkoutEntity> workout = new ArrayList<>();
     @Access(AccessType.PROPERTY)
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "JOIN_SPORT_USER",
-            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "USER_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "SPORT_ID", referencedColumnName = "SPORT_ID")})
-    public List<SportEntity> getSports() {
-        return sports;
+    @OneToMany(
+            targetEntity = WorkoutEntity.class,
+            mappedBy = "user",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER)
+    public List<WorkoutEntity> getWorkout() {
+        return workout;
     }
 
     private List<Reservation> reservation = new ArrayList<>() ;
@@ -57,13 +57,13 @@ public class UserEntity implements UserDetails {
     @OneToMany(
             targetEntity = Reservation.class,
             mappedBy = "userEntity",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.PERSIST,
             fetch = FetchType.LAZY)
     public List<Reservation> getReservation() {
         return reservation;
     }
 
-    public UserEntity(UserType type, String firstName, String lastName, String email, String password, String description, String phone, List<SportEntity> sports, List<Reservation> reservation) {
+    public UserEntity(UserType type, String firstName, String lastName, String email, String password, String description, String phone) {
         this.type = type;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -71,8 +71,6 @@ public class UserEntity implements UserDetails {
         this.password = password;
         this.description = description;
         this.phone = phone;
-        this.sports = sports;
-        this.reservation = reservation;
     }
 
     public UserEntity() {
@@ -139,8 +137,9 @@ public class UserEntity implements UserDetails {
         this.phone = phone;
     }
 
-    public void setSports(List<SportEntity> sports) {
-        this.sports = sports;
+
+    public void setWorkout(List<WorkoutEntity> workout) {
+        this.workout = workout;
     }
 
     public void setReservation(List<Reservation> reservation) {
@@ -161,7 +160,24 @@ public class UserEntity implements UserDetails {
         return password;
     }
 
-//todo pozmieniac dostepy
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", type=" + type +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", description='" + description + '\'' +
+                ", phone='" + phone + '\'' +
+                ", workout=" + workout +
+                ", reservation=" + reservation +
+                '}';
+    }
+
+    //todo pozmieniac dostepy
     @Override
     public boolean isAccountNonExpired() {
         return true;

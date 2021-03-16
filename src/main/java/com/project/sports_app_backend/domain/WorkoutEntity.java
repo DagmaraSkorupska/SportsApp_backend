@@ -1,11 +1,8 @@
 package com.project.sports_app_backend.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Entity
 @Table(name = "WORKOUT")
@@ -13,8 +10,12 @@ public class WorkoutEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID",unique = true, nullable = false)
+    @Column(name = "WORKOUT_ID",unique = true, nullable = false)
     private Long id;
+
+//    public enum TypeSport {
+//        Swim, Run, Bike, Gym, Tennis
+//    }
 
     @Column(name = "NAME_WORKOUT", nullable = false)
     private String name;
@@ -31,19 +32,27 @@ public class WorkoutEntity {
     @Column(name = "ADDRESS", nullable = false)
     private String address;
 
-    private List<SportEntity> sport = new ArrayList<>();
+    private UserEntity user;
     @Access(AccessType.PROPERTY)
-    @OneToMany(targetEntity = SportEntity.class,
-            mappedBy = "workouts",
-            cascade = CascadeType.ALL ,
-            fetch = FetchType.EAGER)
-    public List<SportEntity> getSport() {
-        return sport;
+    @ManyToOne
+    @JoinColumn(name="USER_ID")
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setSport(List<SportEntity> sport) {
-        this.sport = sport;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
+
+    @Column(name = "DAY_WORKOUT", nullable = false)
+    private String day;
+
+    @Column(name = "HOUR_WORKOUT", nullable = false)
+    private String hour;
+
+//    @Enumerated(EnumType.STRING)
+//    private WorkoutEntity.TypeSport typeSport;
+
 
 //    private ReservationEntity reservationEntity = new ReservationEntity();
 //    @Access(AccessType.PROPERTY)
@@ -58,13 +67,17 @@ public class WorkoutEntity {
 //    }
 
 
-    public WorkoutEntity( String name, String description, int durationMin, double price1h, String address, List<SportEntity> sport) {
+
+    public WorkoutEntity( String name, String description, int durationMin, double price1h, String address, String day, String hour, UserEntity user) {
         this.name = name;
         this.description = description;
         this.durationMin = durationMin;
         this.price1h = price1h;
         this.address = address;
-        this.sport = sport;
+        this.day = day;
+        this.hour = hour;
+        this.user = user;
+
     }
 
     public WorkoutEntity() {
@@ -119,8 +132,45 @@ public class WorkoutEntity {
         this.address = address;
     }
 
+//    public TypeSport getTypeSport() {
+//        return typeSport;
+//    }
+//
+//    public void setTypeSport(TypeSport typeSport) {
+//        this.typeSport = typeSport;
+//    }
 
 
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    @Override
+    public String toString() {
+        return "WorkoutEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", durationMin=" + durationMin +
+                ", price1h=" + price1h +
+                ", address='" + address + '\'' +
+                ", user=" + user +
+                ", day='" + day + '\'' +
+                ", hour='" + hour + '\'' +
+                '}';
+    }
 
 
 }
